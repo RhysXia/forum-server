@@ -1,8 +1,11 @@
 spring:
+  application:
+    name: forum-service-article
+spring:
   cloud:
     config:
       profile: dev
       label: master
       uri: http://localhost:8200/
-  application:
-    name: forum-gateway
+
+

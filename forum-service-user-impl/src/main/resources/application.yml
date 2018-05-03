@@ -1,11 +1,11 @@
 spring:
   application:
-    name: forum-user
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8000/eureka/
-server:
-  port: 9000
+    name: forum-service-user
+spring:
+  cloud:
+    config:
+      profile: dev
+      label: master
+      uri: http://localhost:8200/
 
 

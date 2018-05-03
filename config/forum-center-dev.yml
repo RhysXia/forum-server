@@ -1,6 +1,3 @@
-spring:
-  application:
-    name: forum-center
 eureka:
   client:
     service-url:
