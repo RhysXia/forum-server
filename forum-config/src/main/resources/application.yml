@@ -5,7 +5,9 @@ spring:
     config:
       server:
         git:
-          uri: http
+          uri: https://github.com/RhysXia/forum-server
+          search-paths:
+            - config
 eureka:
   client:
     service-url:
