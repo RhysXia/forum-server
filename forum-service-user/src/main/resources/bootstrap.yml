@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: forum-service-user
+  cloud:
+    config:
+      profile: dev
+      label: master
+      uri: http://localhost:8200/
+  datasource:
+    druid:
+      filter:
+        stat:
+          log-slow-sql: true
+
+
+
