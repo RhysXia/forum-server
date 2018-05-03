@@ -6,12 +6,7 @@ spring:
       server:
         git:
           uri: https://github.com/RhysXia/forum-server
-          search-paths:
-            - config
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8000/eureka/
+          search-paths: config
 server:
   port: 8200
 
