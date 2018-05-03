@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: forum-config
+  cloud:
+    config:
+      server:
+        git:
+          uri: http
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka/
+server:
+  port: 8200
+
