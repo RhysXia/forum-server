@@ -1,12 +1,5 @@
 spring:
+  profiles:
+    active: dev
   application:
     name: forum-config
-  cloud:
-    config:
-      server:
-        git:
-          uri: https://github.com/RhysXia/forum-server
-          search-paths: config/{profile}
-server:
-  port: 8200
-

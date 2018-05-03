@@ -4,4 +4,8 @@ eureka:
       defaultZone: http://localhost:8000/eureka/
 server:
   port: 8100
-
+zuul:
+  routes:
+    service-user:
+      path: /service/user/**
+      serviceId: forum-service-user
