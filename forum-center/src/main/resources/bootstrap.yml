@@ -5,4 +5,4 @@ spring:
       label: master
       uri: http://localhost:8200/
   application:
-    name: center
+    name: forum-center
