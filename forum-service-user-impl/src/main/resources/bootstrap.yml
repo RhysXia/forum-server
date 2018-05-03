@@ -1,7 +1,6 @@
 spring:
   application:
     name: forum-service-user
-spring:
   cloud:
     config:
       profile: dev
