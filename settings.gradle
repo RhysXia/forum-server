@@ -1,10 +1,2 @@
 rootProject.name = 'forum-server'
-include 'forum-center'
-include 'forum-gateway'
-include 'forum-config'
-include 'forum-bus'
-include 'forum-service-user'
-include 'forum-service-article'
-include 'forum-service-auth'
-include 'forum-common'
 
