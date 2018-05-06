@@ -1,4 +1,4 @@
-package site.rhys.forum.service.auth;
+package site.rhys.forum.service.article;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,17 +28,17 @@ public class Swagger2 {
                 .apiInfo(apiInfo())
                 .useDefaultResponseMessages(false)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("site.rhys.forum.service.auth"))
+                .apis(RequestHandlerSelectors.basePackage("site.rhys.forum.service.article"))
                 .paths(PathSelectors.any())
                 .build();
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("权限管理微服务")
-                .description("权限相关的微服务接口")
+                .title("文章管理微服务")
+                .description("文章相关的微服务接口")
                 .termsOfServiceUrl("http://forum.rhys.site")
-                .contact(new Contact("Rhys Xia","http://forum.rhys.site","xrs4433@outlook.com"))
+                .contact(new Contact("Rhys Xia", "http://forum.rhys.site", "xrs4433@outlook.com"))
                 .version("1.0")
                 .build();
     }

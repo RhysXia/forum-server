@@ -4,15 +4,9 @@ eureka:
       defaultZone: http://localhost:8000/eureka/
 server:
   port: 9100
-
-mybatis:
-  mapper-locations: classpath:mapper/*Mapper.xml
-  type-aliases-package: site.rhys.forum.core.pojo
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    map-underscore-to-camel-case: true
 spring:
   datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
     druid:
       username: root
       password: root
@@ -25,5 +19,15 @@ spring:
       filters: stat,wall,log4j,config
       stat-view-servlet:
         reset-enable: false
+logging:
+  level:
+    site.rhys.forum.service.auth: info
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: site.rhys.forum.common.pojo
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+
 pagehelper:
   reasonable: true
