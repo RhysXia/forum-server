@@ -1,40 +1,99 @@
 buildscript {
     ext {
         springBootVersion = '1.5.12.RELEASE'
+        dockerVersion = '1.2'
     }
     repositories {
+        mavenLocal()
         mavenCentral()
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("se.transmode.gradle:gradle-docker:${dockerVersion}")
     }
 }
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.5'
+}
+allprojects {
+    group = 'site.rhys.forum'
+    version = "1.0.0"
+}
+subprojects {
+    ext {
+        springCloudVersion = 'Edgware.SR3'
+        mybatisSpringBootVersion = '1.3.2'
+        pageHelperSpringBootVersion = '1.2.5'
+        druidSpringBootVersion = '1.1.9'
+    }
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'docker'
+//    apply plugin: 'application'
 
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'org.springframework.boot'
 
-group = 'site.rhys.forum'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
 
-repositories {
-    mavenCentral()
+    repositories {
+        mavenCentral()
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+    }
+
+    dependencies {
+//    compile('org.springframework.cloud:spring-cloud-starter-eureka')
+//    compile('org.springframework.cloud:spring-cloud-starter-eureka-server')
+//    testCompile('org.springframework.boot:spring-boot-starter-test')
+        compile("org.projectlombok:lombok")
+
+    }
+
+
+    docker {
+        baseImage 'java:8-jre-alpine'
+        maintainer 'Rhys <xrs4433@outlook.com>'
+    }
+
+
+    task buildDocker(type: Docker, dependsOn: bootRepackage) {
+        push = false
+        tag = "forum-server/${jar.baseName}"
+        runCommand("mkdir /app")
+        addFile("${jar.baseName}-${jar.version}.jar", "/app/app.jar")
+        entryPoint(["java", "-jar", "/app/app.jar"])
+        exposePort(8000)
+        doFirst {
+            copy {
+                from jar
+                into stageDir
+            }
+        }
+    }
+
 }
 
+project(":forum-system-center") {
+    dependencies {
+        compile("org.springframework.cloud:spring-cloud-starter-eureka-server")
+    }
+}
+project(":forum-service-user-api") {
 
-ext {
-    springCloudVersion = 'Edgware.SR3'
 }
 
-dependencies {
-    compile('org.springframework.cloud:spring-cloud-starter-eureka')
-    compile('org.springframework.cloud:spring-cloud-starter-eureka-server')
-    testCompile('org.springframework.boot:spring-boot-starter-test')
-}
-
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+project(":forum-service-user") {
+    dependencies {
+        compile(project(":forum-service-user-api"))
+        compile("org.springframework.cloud:spring-cloud-starter-eureka")
+        compile("com.alibaba:druid-spring-boot-starter:${druidSpringBootVersion}")
+        compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:${mybatisSpringBootVersion}")
+        compile("com.github.pagehelper:pagehelper-spring-boot-starter:${pageHelperSpringBootVersion}")
+        runtime("mysql:mysql-connector-java")
     }
 }
