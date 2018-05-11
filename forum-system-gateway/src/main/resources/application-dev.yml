@@ -12,9 +12,13 @@ logging:
     site.rhys.forum.service.auth: info
 zuul:
   routes:
+    service-auth:
+      serviceId: service-auth
+      path: /${zuul.routes.service-auth.serviceId}/**
     service-user:
       serviceId: service-user
       path: /${zuul.routes.service-user.serviceId}/**
     service-article:
       serviceId: service-article
       path: /${zuul.routes.service-article.serviceId}/**
+

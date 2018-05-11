@@ -16,7 +16,7 @@ import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 @SpringBootApplication
 @EnableFeignClients
 @EnableDiscoveryClient
-@MapperScan("site.rhys.forum.controller.article.mapper")
+@MapperScan("site.rhys.forum.service.article.mapper")
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

@@ -33,19 +33,27 @@ services:
       TZ: Asia/Shanghai
     ports:
       - "8001:8000"
-  service-user:
-    container_name: controller-user
-    image: forum-server/forum-controller-user:1.0.0
+  service-auth:
+    container_name: service-auth
+    image: forum-server/forum-service-auth:1.0.0
     restart: always
     environment:
       TZ: Asia/Shanghai
     ports:
       - "8002:8000"
-  service-article:
-    container_name: controller-article
-    image: forum-server/forum-controller-article:1.0.0
+  service-user:
+    container_name: service-user
+    image: forum-server/forum-service-user:1.0.0
     restart: always
     environment:
       TZ: Asia/Shanghai
     ports:
       - "8003:8000"
+  service-article:
+    container_name: service-article
+    image: forum-server/forum-service-article:1.0.0
+    restart: always
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - "8004:8000"

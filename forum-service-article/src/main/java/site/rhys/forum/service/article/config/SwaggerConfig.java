@@ -27,7 +27,7 @@ public class SwaggerConfig {
     public Docket docket() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("site.rhys.forum.controller.article.controller"))
+                .apis(RequestHandlerSelectors.basePackage("site.rhys.forum.service.article"))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(apiInfo())

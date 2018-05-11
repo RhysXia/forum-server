@@ -16,6 +16,6 @@ import site.rhys.forum.service.article.api.model.Article;
 public interface ArticleApi {
 
     @ApiOperation(value = "根据文章id查找文章")
-    @GetMapping("/articles/{id:\\d+}")
+    @GetMapping("/articles/{id}")
     Article findById(@PathVariable("id") Long id);
 }

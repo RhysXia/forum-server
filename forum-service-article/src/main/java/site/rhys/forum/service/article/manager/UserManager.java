@@ -1,7 +1,7 @@
 package site.rhys.forum.service.article.manager;
 
 import org.springframework.cloud.netflix.feign.FeignClient;
-import site.rhys.forum.common.constant.ServiceNameContants;
+import site.rhys.forum.common.constant.ServiceNameConstants;
 import site.rhys.forum.service.article.manager.fallback.UserManagerFallback;
 import site.rhys.forum.service.user.api.api.UserApi;
 
@@ -11,6 +11,6 @@ import site.rhys.forum.service.user.api.api.UserApi;
  * @date 2018/05/09 22:31
  * @since 1.0.0
  */
-@FeignClient(value = ServiceNameContants.SERVICE_USER_NAME, fallback = UserManagerFallback.class)
+@FeignClient(value = ServiceNameConstants.SERVICE_USER_NAME, fallback = UserManagerFallback.class)
 public interface UserManager extends UserApi {
 }

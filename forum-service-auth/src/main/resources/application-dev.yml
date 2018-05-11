@@ -6,7 +6,7 @@ eureka:
       defaultZone: http://system-center:8000/eureka/
 spring:
   application:
-    name: service-article
+    name: service-auth
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
@@ -23,10 +23,10 @@ spring:
         reset-enable: false
 logging:
   level:
-    site.rhys.forum.service.article: info
+    site.rhys.forum.service.auth: info
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
-  type-aliases-package: site.rhys.forum.service.article.api.model
+  type-aliases-package: site.rhys.forum.service.auth.api.model
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true

@@ -19,6 +19,7 @@ allprojects {
     group = 'site.rhys.forum'
     version = "1.0.0"
 }
+
 subprojects {
     ext {
         springCloudVersion = 'Edgware.SR3'
@@ -30,8 +31,6 @@ subprojects {
     apply plugin: 'java'
     apply plugin: 'eclipse'
     apply plugin: 'org.springframework.boot'
-    apply plugin: 'docker'
-//    apply plugin: 'application'
 
 
     sourceCompatibility = 1.8
@@ -83,15 +82,16 @@ subprojects {
 
 
     if (project.name.startsWith("forum-system-") || (project.name.startsWith("forum-service-") && !project.name.endsWith("-api"))) {
+        apply plugin: 'docker'
+        apply plugin: 'application'
+
         docker {
             baseImage 'java:8-jre-alpine'
             maintainer 'Rhys <xrs4433@outlook.com>'
         }
-        task buildDocker(type: Docker, dependsOn: bootRepackage) {
+        distDocker {
             push = false
             tag = "forum-server/${jar.baseName}"
-//            setEnvironment("JAR_FILE", "${jar.baseName}-${jar.version}.jar")
-//            dockerfile = file("Dockerfile")
             runCommand("mkdir /app")
             workingDir("/app")
             addFile("${jar.baseName}-${jar.version}.jar", "/app/app.jar")

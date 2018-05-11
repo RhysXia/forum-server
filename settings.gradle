@@ -6,4 +6,6 @@ include 'forum-system-gateway'
 include 'forum-service-article-api'
 include 'forum-service-article'
 include 'forum-common'
+include 'forum-service-auth-api'
+include 'forum-service-auth'
 
