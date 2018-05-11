@@ -1,10 +1,11 @@
-package site.rhys.forum.service.user;
+package site.rhys.forum.service.article;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 
 /**
  * @author Rhys Xia<xrs4433@outlook.com>
@@ -13,9 +14,9 @@ import org.springframework.cloud.netflix.feign.EnableFeignClients;
  * @since 1.0.0
  */
 @SpringBootApplication
-@EnableDiscoveryClient
 @EnableFeignClients
-@MapperScan("site.rhys.forum.controller.user.mapper")
+@EnableDiscoveryClient
+@MapperScan("site.rhys.forum.controller.article.mapper")
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

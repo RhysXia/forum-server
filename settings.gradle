@@ -2,4 +2,8 @@ rootProject.name = 'forum-server'
 include 'forum-system-center'
 include 'forum-service-user'
 include 'forum-service-user-api'
+include 'forum-system-gateway'
+include 'forum-service-article-api'
+include 'forum-service-article'
+include 'forum-common'
 

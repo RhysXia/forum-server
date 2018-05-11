@@ -25,6 +25,7 @@ subprojects {
         mybatisSpringBootVersion = '1.3.2'
         pageHelperSpringBootVersion = '1.2.5'
         druidSpringBootVersion = '1.1.9'
+        springfoxSwaggerVersion = '2.8.0'
     }
     apply plugin: 'java'
     apply plugin: 'eclipse'
@@ -47,31 +48,60 @@ subprojects {
     }
 
     dependencies {
-//    compile('org.springframework.cloud:spring-cloud-starter-eureka')
-//    compile('org.springframework.cloud:spring-cloud-starter-eureka-server')
-//    testCompile('org.springframework.boot:spring-boot-starter-test')
         compile("org.projectlombok:lombok")
+    }
+    if (project.name != "forum-common") {
+        dependencies {
+            compile(project(":forum-common"))
+        }
+    }
 
+    if (project.name.startsWith("forum-service-")) {
+        // controller dependency
+        if (project.name.endsWith("-api")) {
+            dependencies {
+                compile("io.springfox:springfox-swagger2:${springfoxSwaggerVersion}")
+                compile("org.springframework:spring-web")
+            }
+        } else {
+            // controller-api dependency
+            dependencies {
+                compile("io.springfox:springfox-swagger-ui:${springfoxSwaggerVersion}")
+                compile(project(":${project.name}-api"))
+                compile("org.springframework.cloud:spring-cloud-starter-eureka")
+                compile("org.springframework.cloud:spring-cloud-starter-feign")
+                compile('org.springframework.boot:spring-boot-starter-actuator')
+                compile("com.alibaba:druid-spring-boot-starter:${druidSpringBootVersion}")
+                compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:${mybatisSpringBootVersion}")
+                compile("com.github.pagehelper:pagehelper-spring-boot-starter:${pageHelperSpringBootVersion}")
+                runtime("mysql:mysql-connector-java")
+            }
+        }
     }
 
 
-    docker {
-        baseImage 'java:8-jre-alpine'
-        maintainer 'Rhys <xrs4433@outlook.com>'
-    }
 
 
-    task buildDocker(type: Docker, dependsOn: bootRepackage) {
-        push = false
-        tag = "forum-server/${jar.baseName}"
-        runCommand("mkdir /app")
-        addFile("${jar.baseName}-${jar.version}.jar", "/app/app.jar")
-        entryPoint(["java", "-jar", "/app/app.jar"])
-        exposePort(8000)
-        doFirst {
-            copy {
-                from jar
-                into stageDir
+    if (project.name.startsWith("forum-system-") || (project.name.startsWith("forum-service-") && !project.name.endsWith("-api"))) {
+        docker {
+            baseImage 'java:8-jre-alpine'
+            maintainer 'Rhys <xrs4433@outlook.com>'
+        }
+        task buildDocker(type: Docker, dependsOn: bootRepackage) {
+            push = false
+            tag = "forum-server/${jar.baseName}"
+//            setEnvironment("JAR_FILE", "${jar.baseName}-${jar.version}.jar")
+//            dockerfile = file("Dockerfile")
+            runCommand("mkdir /app")
+            workingDir("/app")
+            addFile("${jar.baseName}-${jar.version}.jar", "/app/app.jar")
+            entryPoint(["java", "-jar", "/app/app.jar"])
+            exposePort(8000)
+            doFirst {
+                copy {
+                    from jar
+                    into stageDir
+                }
             }
         }
     }
@@ -83,17 +113,23 @@ project(":forum-system-center") {
         compile("org.springframework.cloud:spring-cloud-starter-eureka-server")
     }
 }
+project(":forum-system-gateway") {
+    dependencies {
+        compile("org.springframework.cloud:spring-cloud-starter-eureka")
+        compile("org.springframework.cloud:spring-cloud-starter-zuul")
+    }
+}
+
 project(":forum-service-user-api") {
 
 }
 
 project(":forum-service-user") {
+
+}
+
+project(":forum-service-article") {
     dependencies {
         compile(project(":forum-service-user-api"))
-        compile("org.springframework.cloud:spring-cloud-starter-eureka")
-        compile("com.alibaba:druid-spring-boot-starter:${druidSpringBootVersion}")
-        compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:${mybatisSpringBootVersion}")
-        compile("com.github.pagehelper:pagehelper-spring-boot-starter:${pageHelperSpringBootVersion}")
-        runtime("mysql:mysql-connector-java")
     }
 }
