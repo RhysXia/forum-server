@@ -1,6 +1,7 @@
 package site.rhys.forum.service.article.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import site.rhys.forum.service.article.api.api.ArticleApi;
 import site.rhys.forum.service.article.api.model.Article;
@@ -18,7 +19,7 @@ public class ArticleController implements ArticleApi {
     private ArticleService articleService;
 
     @Override
-    public Article findById(Long id) {
+    public Article findById(@PathVariable("id") Long id) {
         return articleService.selectById(id);
     }
 }

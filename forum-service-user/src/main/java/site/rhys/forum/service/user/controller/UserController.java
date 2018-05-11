@@ -1,10 +1,10 @@
 package site.rhys.forum.service.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import site.rhys.forum.service.user.api.api.UserApi;
 import site.rhys.forum.service.user.api.model.User;
-import site.rhys.forum.service.user.mapper.UserMapper;
 import site.rhys.forum.service.user.service.UserService;
 
 /**
@@ -19,7 +19,7 @@ public class UserController implements UserApi {
     private UserService userService;
 
     @Override
-    public User findById(Long id) {
+    public User findById(@PathVariable("id") Long id) {
         return userService.selectById(id);
     }
 }
