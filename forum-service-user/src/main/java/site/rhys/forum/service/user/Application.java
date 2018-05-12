@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @author Rhys Xia<xrs4433@outlook.com>
@@ -12,7 +13,7 @@ import org.springframework.cloud.netflix.feign.EnableFeignClients;
  * @date 2018/05/09 16:44
  * @since 1.0.0
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"site.rhys.forum"})
 @EnableDiscoveryClient
 @EnableFeignClients
 @MapperScan("site.rhys.forum.service.user.mapper")

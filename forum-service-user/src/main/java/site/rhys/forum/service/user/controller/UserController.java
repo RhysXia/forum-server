@@ -1,7 +1,6 @@
 package site.rhys.forum.service.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import site.rhys.forum.service.user.api.api.UserApi;
 import site.rhys.forum.service.user.api.model.User;
@@ -19,7 +18,7 @@ public class UserController implements UserApi {
     private UserService userService;
 
     @Override
-    public User findById(@PathVariable("id") Long id) {
+    public User findById(Long id) {
         return userService.selectById(id);
     }
 }

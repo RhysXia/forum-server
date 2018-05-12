@@ -1,7 +1,6 @@
 package site.rhys.forum.service.auth.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import site.rhys.forum.service.auth.api.api.RoleApi;
 import site.rhys.forum.service.auth.api.model.Role;
@@ -19,7 +18,7 @@ public class RoleController implements RoleApi {
     private RoleService roleService;
 
     @Override
-    public Role findById(@PathVariable("id") Long id) {
+    public Role findById(Long id) {
         return roleService.selectById(id);
     }
 }

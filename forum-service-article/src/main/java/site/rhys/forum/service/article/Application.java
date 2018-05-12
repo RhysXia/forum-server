@@ -12,7 +12,7 @@ import org.springframework.cloud.netflix.feign.EnableFeignClients;
  * @date 2018/05/09 16:44
  * @since 1.0.0
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"site.rhys.forum"})
 @EnableFeignClients
 @EnableDiscoveryClient
 @MapperScan("site.rhys.forum.service.article.mapper")
