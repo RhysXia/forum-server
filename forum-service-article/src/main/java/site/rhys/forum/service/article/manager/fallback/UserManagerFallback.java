@@ -1,7 +1,7 @@
 package site.rhys.forum.service.article.manager.fallback;
 
 import org.springframework.stereotype.Component;
-import site.rhys.forum.service.user.api.api.UserApi;
+import site.rhys.forum.service.article.manager.UserManager;
 import site.rhys.forum.service.user.api.model.User;
 
 /**
@@ -11,7 +11,7 @@ import site.rhys.forum.service.user.api.model.User;
  * @since 1.0.0
  */
 @Component
-public class UserManagerFallback implements UserApi {
+public class UserManagerFallback implements UserManager {
     @Override
     public User findById(Long id) {
         System.out.println("111111111111111111111111111111111111111111111111111111111111111111");

@@ -7,29 +7,26 @@ import java.util.Date;
 /**
  * @author Rhys Xia<xrs4433@outlook.com>
  * @version 1.0.0
- * @date 2018/05/09 16:48
+ * @date 2018/05/11 22:16
  * @since 1.0.0
- * <p>
- * 文章
+ * 文章分类
  */
 @Data
-public class Article {
+public class Category {
     /**
      * id
      */
     private Long id;
+
     /**
-     * 标题
+     * 名称
      */
-    private String title;
+    private String name;
+
     /**
-     * 内容
+     * 描述
      */
-    private String context;
-    /**
-     * 内容类型
-     */
-    private ContextType contextType;
+    private String description;
 
     /**
      * 创建时间
@@ -37,17 +34,12 @@ public class Article {
     private Date createAt;
 
     /**
-     * 更新时间
-     */
-    private Date updateAt;
-
-    /**
      * 作者id
      */
     private Long authorId;
 
     /**
-     * 作者id
+     * 文章总数
      */
-    private Long categoryId;
+    private Long articleNum;
 }

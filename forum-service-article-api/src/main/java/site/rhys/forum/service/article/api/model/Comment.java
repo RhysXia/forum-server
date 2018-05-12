@@ -7,30 +7,23 @@ import java.util.Date;
 /**
  * @author Rhys Xia<xrs4433@outlook.com>
  * @version 1.0.0
- * @date 2018/05/09 16:48
+ * @date 2018/05/11 22:31
  * @since 1.0.0
- * <p>
- * 文章
  */
 @Data
-public class Article {
+public class Comment {
     /**
      * id
      */
     private Long id;
     /**
-     * 标题
+     * 评论内容
      */
-    private String title;
-    /**
-     * 内容
-     */
-    private String context;
+    private String content;
     /**
      * 内容类型
      */
     private ContextType contextType;
-
     /**
      * 创建时间
      */
@@ -47,7 +40,12 @@ public class Article {
     private Long authorId;
 
     /**
-     * 作者id
+     * 评论对应的文章id
      */
-    private Long categoryId;
+    private Long articleId;
+
+    /**
+     * 父评论id,如果没有则为null
+     */
+    private Long parentId;
 }
