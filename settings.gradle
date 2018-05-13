@@ -8,4 +8,5 @@ include 'forum-service-article'
 include 'forum-common'
 include 'forum-service-auth-api'
 include 'forum-service-auth'
+include 'forum-support-spring-boot-starter'
 

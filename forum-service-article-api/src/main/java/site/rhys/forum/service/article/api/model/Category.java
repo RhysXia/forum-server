@@ -41,5 +41,5 @@ public class Category {
     /**
      * 文章总数
      */
-    private Long articleNum;
+    private Long articleCount;
 }

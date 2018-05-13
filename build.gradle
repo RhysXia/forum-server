@@ -52,10 +52,7 @@ subprojects {
     }
 
     if (project.name == "forum-common") {
-        dependencies {
-            compile("org.springframework:spring-webmvc")
-            compile("javax.servlet:javax.servlet-api")
-        }
+
     } else {
         dependencies {
             compile(project(":forum-common"))
@@ -73,6 +70,7 @@ subprojects {
         } else {
             // service-api dependency
             dependencies {
+                compile(project(":forum-support-spring-boot-starter"))
                 compile("io.springfox:springfox-swagger-ui:${springfoxSwaggerVersion}")
                 compile(project(":${project.name}-api"))
                 compile("org.springframework.cloud:spring-cloud-starter-eureka")
@@ -116,6 +114,14 @@ subprojects {
     }
 
 }
+
+project(":forum-support-spring-boot-starter") {
+    dependencies {
+        compile("org.springframework:spring-webmvc")
+        compile("javax.servlet:javax.servlet-api")
+    }
+}
+
 project(":forum-system-center") {
     dependencies {
         compile("org.springframework.cloud:spring-cloud-starter-eureka-server")

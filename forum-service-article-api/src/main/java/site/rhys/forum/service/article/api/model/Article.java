@@ -42,6 +42,11 @@ public class Article {
     private Date updateAt;
 
     /**
+     * 评论数
+     */
+    private Long commentCount;
+
+    /**
      * 作者id
      */
     private Long authorId;

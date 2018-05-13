@@ -48,4 +48,9 @@ public class Comment {
      * 父评论id,如果没有则为null
      */
     private Long parentId;
+
+    /**
+     * 楼层
+     */
+    private Long floorNum;
 }

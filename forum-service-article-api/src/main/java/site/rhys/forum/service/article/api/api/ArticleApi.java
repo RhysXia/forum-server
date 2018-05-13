@@ -15,6 +15,8 @@ import site.rhys.forum.service.article.api.model.Article;
 @Api(tags = "文章api", description = "文章相关操作的api")
 public interface ArticleApi {
 
+
+
     @ApiOperation(value = "根据文章id查找文章")
     @GetMapping("/articles/{id}")
     Article findById(@PathVariable("id") Long id);
