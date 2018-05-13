@@ -3,7 +3,7 @@ package site.rhys.forum.service.auth.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import site.rhys.forum.service.auth.api.model.Role;
-import site.rhys.forum.service.auth.mapper.RoleMapper;
+import site.rhys.forum.service.auth.repository.RoleRepository;
 import site.rhys.forum.service.auth.service.RoleService;
 
 /**
@@ -16,10 +16,10 @@ import site.rhys.forum.service.auth.service.RoleService;
 public class RoleServiceImpl implements RoleService {
 
     @Autowired
-    private RoleMapper roleMapper;
+    private RoleRepository roleRepository;
 
     @Override
     public Role selectById(Long id) {
-        return roleMapper.selectById(id);
+        return roleRepository.findOne(id);
     }
 }

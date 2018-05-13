@@ -1,11 +1,11 @@
-package site.rhys.forum.common.web.argument;
+package site.rhys.forum.support.spring.boot.starter.argument.resolver;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.method.annotation.PathVariableMethodArgumentResolver;
 import org.springframework.web.util.UriComponentsBuilder;
-import site.rhys.forum.common.utils.ClassUtils;
+import site.rhys.forum.support.spring.boot.starter.utils.ClassUtils;
 
 import java.util.Map;
 

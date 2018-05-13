@@ -1,4 +1,4 @@
-package site.rhys.forum.common.web.argument;
+package site.rhys.forum.support.spring.boot.starter.argument.resolver;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor;
-import site.rhys.forum.common.utils.ClassUtils;
+import site.rhys.forum.support.spring.boot.starter.utils.ClassUtils;
 
 import java.io.IOException;
 import java.lang.reflect.Type;

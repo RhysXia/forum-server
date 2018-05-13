@@ -3,7 +3,7 @@ package site.rhys.forum.service.user.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import site.rhys.forum.service.user.api.model.User;
-import site.rhys.forum.service.user.mapper.UserMapper;
+import site.rhys.forum.service.user.repository.UserRepository;
 import site.rhys.forum.service.user.service.UserService;
 
 /**
@@ -16,10 +16,10 @@ import site.rhys.forum.service.user.service.UserService;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserMapper userMapper;
+    private UserRepository userRepository;
 
     @Override
     public User selectById(Long id) {
-        return userMapper.selectById(id);
+        return userRepository.findOne(id);
     }
 }

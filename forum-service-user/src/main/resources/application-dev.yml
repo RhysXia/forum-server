@@ -21,17 +21,13 @@ spring:
       filters: stat,wall,log4j,config
       stat-view-servlet:
         reset-enable: false
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
 logging:
   level:
     site.rhys.forum.service.user: info
-mybatis:
-  mapper-locations: classpath:mapper/*Mapper.xml
-  type-aliases-package: site.rhys.forum.service.user.api.model
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    map-underscore-to-camel-case: true
-pagehelper:
-  reasonable: true
 feign:
   hystrix:
     enabled: true

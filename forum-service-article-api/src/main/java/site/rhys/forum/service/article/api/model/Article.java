@@ -2,6 +2,7 @@ package site.rhys.forum.service.article.api.model;
 
 import lombok.Data;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -13,10 +14,17 @@ import java.util.Date;
  * 文章
  */
 @Data
+@Entity
+@Table(indexes = {
+        @Index(columnList = "authorId"),
+        @Index(columnList = "categoryId")
+})
 public class Article {
     /**
      * id
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     /**
      * 标题
@@ -25,20 +33,24 @@ public class Article {
     /**
      * 内容
      */
+    @Column(columnDefinition = "TEXT")
     private String context;
     /**
      * 内容类型
      */
+    @Enumerated(EnumType.STRING)
     private ContextType contextType;
 
     /**
      * 创建时间
      */
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createAt;
 
     /**
      * 更新时间
      */
+    @Temporal(TemporalType.TIMESTAMP)
     private Date updateAt;
 
     /**

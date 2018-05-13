@@ -7,7 +7,7 @@ import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import site.rhys.forum.support.spring.boot.starter.web.argument.*;
+import site.rhys.forum.support.spring.boot.starter.argument.resolver.*;
 
 import java.util.List;
 

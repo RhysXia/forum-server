@@ -1,5 +1,7 @@
 package site.rhys.forum.service.article.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import site.rhys.forum.service.article.api.model.Article;
 
 /**
@@ -9,5 +11,7 @@ import site.rhys.forum.service.article.api.model.Article;
  * @since 1.0.0
  */
 public interface ArticleService {
-    Article selectById(Long id);
+    Article findById(Long id);
+
+    Page<Article> findByPage(Pageable pageable);
 }

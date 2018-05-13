@@ -8,22 +8,24 @@ import java.util.Date;
 /**
  * @author Rhys Xia<xrs4433@outlook.com>
  * @version 1.0.0
- * @date 2018/05/09 16:48
+ * @date 2018/05/13 16:42
  * @since 1.0.0
  */
 @Data
 @Entity
-public class Role {
+@Table(indexes = {
+        @Index(columnList = "roleId"),
+        @Index(columnList = "permissionId")
+})
+public class RolePermission {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String name;
+    private Long roleId;
 
-    private String description;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updateAt;
+    private Long permissionId;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createAt;

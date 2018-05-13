@@ -2,6 +2,7 @@ package site.rhys.forum.service.article.api.model;
 
 import lombok.Data;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -12,10 +13,16 @@ import java.util.Date;
  * 文章分类
  */
 @Data
+@Entity
+@Table(indexes = {
+        @Index(columnList = "authorId")
+})
 public class Category {
     /**
      * id
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     /**
@@ -31,6 +38,7 @@ public class Category {
     /**
      * 创建时间
      */
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createAt;
 
     /**

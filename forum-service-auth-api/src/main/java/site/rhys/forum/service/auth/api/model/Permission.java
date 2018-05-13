@@ -13,14 +13,18 @@ import java.util.Date;
  */
 @Data
 @Entity
-public class Role {
+public class Permission {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String name;
+    /**
+     * 请求的url，支持ant风格表达式
+     */
+    private String url;
 
-    private String description;
+    @Enumerated(EnumType.STRING)
+    private HttpMethod method;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateAt;

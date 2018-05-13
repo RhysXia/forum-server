@@ -1,9 +1,11 @@
 package site.rhys.forum.service.article.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import site.rhys.forum.service.article.api.model.Article;
-import site.rhys.forum.service.article.mapper.ArticleMapper;
+import site.rhys.forum.service.article.repository.ArticleRepository;
 import site.rhys.forum.service.article.service.ArticleService;
 
 /**
@@ -15,10 +17,15 @@ import site.rhys.forum.service.article.service.ArticleService;
 @Service
 public class ArticleServiceImpl implements ArticleService {
     @Autowired
-    private ArticleMapper articleMapper;
+    private ArticleRepository articleRepository;
 
     @Override
-    public Article selectById(Long id) {
-        return articleMapper.selectById(id);
+    public Article findById(Long id) {
+        return articleRepository.findOne(id);
+    }
+
+    @Override
+    public Page<Article> findByPage(Pageable pageable) {
+        return articleRepository.findAll(pageable);
     }
 }

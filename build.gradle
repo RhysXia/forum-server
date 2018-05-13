@@ -27,6 +27,7 @@ subprojects {
         pageHelperSpringBootVersion = '1.2.5'
         druidSpringBootVersion = '1.1.9'
         springfoxSwaggerVersion = '2.8.0'
+        hibernateJpaVersion = '1.0.0.Final'
     }
     apply plugin: 'java'
     apply plugin: 'eclipse'
@@ -66,6 +67,8 @@ subprojects {
             dependencies {
                 compile("io.springfox:springfox-swagger2:${springfoxSwaggerVersion}")
                 compile("org.springframework:spring-web")
+                compile("org.springframework.data:spring-data-commons")
+                compile("org.hibernate.javax.persistence:hibernate-jpa-2.1-api:${hibernateJpaVersion}")
             }
         } else {
             // service-api dependency
@@ -77,8 +80,9 @@ subprojects {
                 compile("org.springframework.cloud:spring-cloud-starter-feign")
                 compile('org.springframework.boot:spring-boot-starter-actuator')
                 compile("com.alibaba:druid-spring-boot-starter:${druidSpringBootVersion}")
-                compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:${mybatisSpringBootVersion}")
-                compile("com.github.pagehelper:pagehelper-spring-boot-starter:${pageHelperSpringBootVersion}")
+//                compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:${mybatisSpringBootVersion}")
+                compile("org.springframework.boot:spring-boot-starter-data-jpa")
+//                compile("com.github.pagehelper:pagehelper-spring-boot-starter:${pageHelperSpringBootVersion}")
                 runtime("mysql:mysql-connector-java")
             }
         }

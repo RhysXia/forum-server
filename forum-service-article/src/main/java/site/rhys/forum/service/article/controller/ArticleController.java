@@ -1,6 +1,8 @@
 package site.rhys.forum.service.article.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RestController;
 import site.rhys.forum.service.article.api.api.ArticleApi;
 import site.rhys.forum.service.article.api.model.Article;
@@ -18,8 +20,29 @@ public class ArticleController implements ArticleApi {
     private ArticleService articleService;
 
     @Override
+    public Page<Article> findByPage(Pageable pageable) {
+
+        return articleService.findByPage(pageable);
+    }
+
+    @Override
     public Article findById(Long id) {
-        return articleService.selectById(id);
+        return articleService.findById(id);
+    }
+
+    @Override
+    public void add(Article article) {
+
+    }
+
+    @Override
+    public void update(Long id, Article article) {
+
+    }
+
+    @Override
+    public void deleteById(Long id) {
+
     }
 
 }
