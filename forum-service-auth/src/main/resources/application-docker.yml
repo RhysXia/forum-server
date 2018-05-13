@@ -1,19 +1,19 @@
 server:
-  port: 8040
+  port: 8000
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8000/eureka/
+      defaultZone: http://system-center:8000/eureka/
 spring:
   application:
-    name: service-article
+    name: service-auth
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       username: root
       password: root
       driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/forum?characterEncoding=utf-8
+      url: jdbc:mysql://mysql:3306/forum?characterEncoding=utf-8
       initial-size: 1
       max-active: 10
       min-idle: 1
@@ -27,7 +27,7 @@ spring:
       ddl-auto: update
 logging:
   level:
-    site.rhys.forum.service.article: info
+    site.rhys.forum.service.auth: info
 feign:
   hystrix:
     enabled: true

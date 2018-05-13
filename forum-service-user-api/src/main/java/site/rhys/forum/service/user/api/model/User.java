@@ -33,9 +33,4 @@ public class User {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createAt;
-    /**
-     * 用户状态
-     */
-    @Enumerated(EnumType.STRING)
-    private UserStatus status;
 }

@@ -69,6 +69,7 @@ subprojects {
                 compile("org.springframework:spring-web")
                 compile("org.springframework.data:spring-data-commons")
                 compile("org.hibernate.javax.persistence:hibernate-jpa-2.1-api:${hibernateJpaVersion}")
+                compile("org.hibernate:hibernate-validator")
             }
         } else {
             // service-api dependency

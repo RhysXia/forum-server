@@ -1,12 +1,12 @@
 server:
-  port: 8040
+  port: 8003
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8000/eureka/
 spring:
   application:
-    name: service-article
+    name: service-user
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
@@ -27,7 +27,7 @@ spring:
       ddl-auto: update
 logging:
   level:
-    site.rhys.forum.service.article: info
+    site.rhys.forum.service.user: info
 feign:
   hystrix:
     enabled: true

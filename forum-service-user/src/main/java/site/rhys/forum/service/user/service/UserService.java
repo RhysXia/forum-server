@@ -1,5 +1,7 @@
 package site.rhys.forum.service.user.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import site.rhys.forum.service.user.api.model.User;
 
 /**
@@ -9,5 +11,26 @@ import site.rhys.forum.service.user.api.model.User;
  * @since 1.0.0
  */
 public interface UserService {
-    User selectById(Long id);
+    /**
+     * 根据id查询用户
+     *
+     * @param id
+     * @return
+     */
+    User findById(Long id);
+
+    /**
+     * 分页查询用户
+     *
+     * @param pageable
+     * @return
+     */
+    Page<User> findByPage(Pageable pageable);
+
+    /**
+     * 添加用户
+     *
+     * @param user
+     */
+    void add(User user);
 }

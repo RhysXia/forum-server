@@ -1,6 +1,8 @@
 package site.rhys.forum.service.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RestController;
 import site.rhys.forum.service.user.api.api.UserApi;
 import site.rhys.forum.service.user.api.model.User;
@@ -19,6 +21,21 @@ public class UserController implements UserApi {
 
     @Override
     public User findById(Long id) {
-        return userService.selectById(id);
+        return userService.findById(id);
+    }
+
+    @Override
+    public Page<User> findByPage(Pageable pageable) {
+        return userService.findByPage(pageable);
+    }
+
+    @Override
+    public void add(User user) {
+        userService.add(user);
+    }
+
+    @Override
+    public void updateById(Boolean selection, Long id, User user) {
+
     }
 }

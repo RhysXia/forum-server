@@ -1,9 +1,9 @@
 server:
-  port: 8000
+  port: 8030
 eureka:
   client:
     service-url:
-      defaultZone: http://system-center:8000/eureka/
+      defaultZone: http://localhost:8000/eureka/
 spring:
   application:
     name: service-auth
@@ -13,7 +13,7 @@ spring:
       username: root
       password: root
       driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://mysql:3306/forum?characterEncoding=utf-8
+      url: jdbc:mysql://localhost:3306/forum?characterEncoding=utf-8
       initial-size: 1
       max-active: 10
       min-idle: 1

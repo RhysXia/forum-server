@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RestController;
 import site.rhys.forum.service.article.api.api.ArticleApi;
 import site.rhys.forum.service.article.api.model.Article;
+import site.rhys.forum.service.article.api.model.Comment;
 import site.rhys.forum.service.article.service.ArticleService;
 
 /**
@@ -26,6 +27,11 @@ public class ArticleController implements ArticleApi {
     }
 
     @Override
+    public Page<Comment> findArticlesByPage(Long articleIds, Pageable pageable) {
+        return null;
+    }
+
+    @Override
     public Article findById(Long id) {
         return articleService.findById(id);
     }
@@ -36,7 +42,7 @@ public class ArticleController implements ArticleApi {
     }
 
     @Override
-    public void update(Long id, Article article) {
+    public void update(Boolean selection, Long id, Article article) {
 
     }
 
