@@ -1,5 +1,6 @@
 package site.rhys.forum.service.user.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,12 +16,14 @@ import site.rhys.forum.service.user.service.UserService;
  * @since 1.0.0
  */
 @RestController
+@Slf4j
 public class UserController implements UserApi {
     @Autowired
     private UserService userService;
 
     @Override
     public User findById(Long id) {
+        log.debug("findById:{}", id);
         return userService.findById(id);
     }
 

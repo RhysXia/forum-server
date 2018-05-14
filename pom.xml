@@ -1,0 +1,184 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>site.rhys.forum</groupId>
+    <artifactId>forum-server</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.12.RELEASE</version>
+    </parent>
+    <modules>
+        <module>forum-common</module>
+        <module>forum-support-spring-boot-starter</module>
+        <module>forum-system-center</module>
+        <module>forum-system-gateway</module>
+        <module>forum-service-user-api</module>
+        <module>forum-service-user</module>
+        <module>forum-service-auth-api</module>
+        <module>forum-service-auth</module>
+        <module>forum-service-article-api</module>
+        <module>forum-service-article</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <druid-spring-boot.version>1.1.9</druid-spring-boot.version>
+        <springfox-swagger.version>2.8.0</springfox-swagger.version>
+        <spring-cloud.version>Edgware.SR3</spring-cloud.version>
+        <dockerfile.plugin.version>1.4.0</dockerfile.plugin.version>
+        <hibernate-jpa.version>1.0.0.Final</hibernate-jpa.version>
+    </properties>
+
+
+    <name>forum-server</name>
+    <description>项目基本配置</description>
+    <url>https://github.com/RhysXia/forum-server</url>
+    <inceptionYear>2017</inceptionYear>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A forum server</comments>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>Rhys Xia</name>
+            <email>xrs4433@outlook.com</email>
+            <url>http://forum.rhys.site</url>
+        </developer>
+    </developers>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--module-->
+            <dependency>
+                <groupId>site.rhys.forum</groupId>
+                <artifactId>forum-common</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>site.rhys.forum</groupId>
+                <artifactId>forum-support-spring-boot-starter</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>site.rhys.forum</groupId>
+                <artifactId>forum-system-center</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>site.rhys.forum</groupId>
+                <artifactId>forum-system-gateway</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>site.rhys.forum</groupId>
+                <artifactId>forum-service-user-api</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>site.rhys.forum</groupId>
+                <artifactId>forum-service-user</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>site.rhys.forum</groupId>
+                <artifactId>forum-service-auth-api</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>site.rhys.forum</groupId>
+                <artifactId>forum-service-auth</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>site.rhys.forum</groupId>
+                <artifactId>forum-service-article-api</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>site.rhys.forum</groupId>
+                <artifactId>forum-service-article</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <!--//-->
+
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${springfox-swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${springfox-swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid-spring-boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate.javax.persistence</groupId>
+                <artifactId>hibernate-jpa-2.1-api</artifactId>
+                <version>${hibernate-jpa.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.spotify</groupId>
+                    <artifactId>dockerfile-maven-plugin</artifactId>
+                    <version>${dockerfile.plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>default</id>
+                            <goals>
+                                <goal>build</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <repository>forum-server/${project.artifactId}</repository>
+                        <tag>${project.version}</tag>
+                        <buildArgs>
+                            <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+                        </buildArgs>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>

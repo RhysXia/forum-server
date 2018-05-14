@@ -14,7 +14,6 @@ import org.springframework.cloud.netflix.feign.EnableFeignClients;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients
-//@MapperScan("site.rhys.forum.service.user.repository")
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

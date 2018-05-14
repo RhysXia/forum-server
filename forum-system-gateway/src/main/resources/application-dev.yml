@@ -21,4 +21,8 @@ zuul:
     service-article:
       serviceId: service-article
       path: /${zuul.routes.service-article.serviceId}/**
+feign:
+  hystrix:
+    enabled: true
+
 

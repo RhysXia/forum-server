@@ -1,6 +1,7 @@
 package site.rhys.forum.support.spring.boot.starter;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.accept.ContentNegotiationManager;
@@ -9,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import site.rhys.forum.support.spring.boot.starter.argument.resolver.*;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
@@ -18,6 +20,7 @@ import java.util.List;
  * @since 1.0.0
  */
 @Configuration
+@ComponentScan("site.rhys.forum.support.spring.boot.starter.controller")
 public class ForumSupportAutoConfiguration {
 
     @Bean

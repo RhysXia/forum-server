@@ -1,6 +1,9 @@
 package site.rhys.forum.service.article.manager.fallback;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
 import site.rhys.forum.service.article.manager.UserManager;
 import site.rhys.forum.service.user.api.model.User;
 
@@ -11,12 +14,26 @@ import site.rhys.forum.service.user.api.model.User;
  * @since 1.0.0
  */
 @Component
-public class UserManagerFallback implements UserManager {
+@RequestMapping
+public class UserManagerFallback implements UserManager{
+
     @Override
     public User findById(Long id) {
-        System.out.println("111111111111111111111111111111111111111111111111111111111111111111");
-        User user = new User();
-        user.setUsername("请求失败");
-        return user;
+        return null;
+    }
+
+    @Override
+    public Page<User> findByPage(Pageable pageable) {
+        return null;
+    }
+
+    @Override
+    public void add(User user) {
+
+    }
+
+    @Override
+    public void updateById(Boolean selection, Long id, User user) {
+
     }
 }
