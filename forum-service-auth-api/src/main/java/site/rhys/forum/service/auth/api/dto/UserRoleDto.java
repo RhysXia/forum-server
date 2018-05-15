@@ -13,6 +13,6 @@ public class UserRoleDto {
 
     private Long userId;
 
-    private Long[] roleId;
+    private Long[] roleIds;
 
 }

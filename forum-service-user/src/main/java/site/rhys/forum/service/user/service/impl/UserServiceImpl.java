@@ -92,6 +92,15 @@ public class UserServiceImpl implements UserService {
         userRepository.save(oldUser);
     }
 
+    @Override
+    public User findByUsernameAndPassword(String username, String password) {
+        if (username == null || password == null) {
+            log.error("用户名密码不能为空");
+            throw new IllegalArgumentException("用户名密码不能为空");
+        }
+        return userRepository.findByUsernameAndPassword(username, SecurityUtils.encrypt(password));
+    }
+
 
     @Transactional
     @Override

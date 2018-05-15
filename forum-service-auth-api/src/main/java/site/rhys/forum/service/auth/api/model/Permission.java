@@ -27,8 +27,5 @@ public class Permission {
     private HttpMethod method;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date updateAt;
-
-    @Temporal(TemporalType.TIMESTAMP)
     private Date createAt;
 }

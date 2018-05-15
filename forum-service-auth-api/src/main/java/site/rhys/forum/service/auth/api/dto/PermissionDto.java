@@ -1,5 +1,6 @@
 package site.rhys.forum.service.auth.api.dto;
 
+import lombok.Data;
 import site.rhys.forum.service.auth.api.model.HttpMethod;
 
 /**
@@ -8,6 +9,7 @@ import site.rhys.forum.service.auth.api.model.HttpMethod;
  * @date 2018/05/15 19:38
  * @since 1.0.0
  */
+@Data
 public class PermissionDto {
 
     /**

@@ -25,8 +25,8 @@ public interface RoleApi {
     Page<Role> findAll(@PageableDefault Pageable pageable);
 
     @ApiOperation(value = "查询指定用户的角色")
-    @GetMapping
-    Page<Permission> findAllByUserId(@RequestParam("userId") Long userId,
+    @GetMapping(params = "userId")
+    Page<Role> findAllByUserId(@RequestParam("userId") Long userId,
                                      @PageableDefault Pageable pageable);
 
 

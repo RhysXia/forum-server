@@ -29,7 +29,7 @@ public interface CategoryApi {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "articleId", value = "文章的id", required = true, paramType = "path", dataType = "long"),
     })
-    @GetMapping
+    @GetMapping(params = "articleId")
     Page<Category> findAllByAuthorId(@RequestParam("authorId") Long authorId,
                                      @PageableDefault Pageable pageable);
 

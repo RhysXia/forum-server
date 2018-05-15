@@ -1,7 +1,7 @@
 package site.rhys.forum.service.auth.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import site.rhys.forum.service.auth.api.model.UserRole;
+import site.rhys.forum.service.auth.api.model.Token;
 
 /**
  * @author Rhys Xia<xrs4433@outlook.com>
@@ -9,8 +9,7 @@ import site.rhys.forum.service.auth.api.model.UserRole;
  * @date 2018/05/09 16:49
  * @since 1.0.0
  */
-public interface UserRoleRepository extends JpaRepository<UserRole, Long> {
-    Long countByRoleId(Long roleId);
+public interface TokenRepository extends JpaRepository<Token, String> {
 
-    int deleteByUserId(Long userId);
+    int deleteByUserId(Long id);
 }

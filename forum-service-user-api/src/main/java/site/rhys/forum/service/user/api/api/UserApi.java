@@ -1,6 +1,9 @@
 package site.rhys.forum.service.user.api.api;
 
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -35,15 +38,24 @@ public interface UserApi {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "username", value = "用户名", required = true, dataType = "string")
     })
-    @GetMapping
+    @GetMapping(params = "username")
     User findByUsername(@RequestParam("username") String username);
+
+    @ApiOperation("根据用户名和密码精确查找指定用户")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "username", value = "用户名", required = true, dataType = "string"),
+            @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "string")
+    })
+    @GetMapping(params = {"username", "password"})
+    User findByUsernameAndPassword(@RequestParam("username") String username,
+                                   @RequestParam("password") String password);
 
 
     @ApiOperation("根据用户名模糊查找用户")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "username", value = "用户名", required = true, dataType = "string")
     })
-    @GetMapping("/search")
+    @GetMapping(value = "/search", params = "username")
     Page<User> findAllByUsernameLike(@RequestParam("username") String username,
                                      @PageableDefault Pageable pageable);
 
@@ -52,7 +64,7 @@ public interface UserApi {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "nickname", value = "昵称", required = true, dataType = "string")
     })
-    @GetMapping("/search")
+    @GetMapping(value = "/search",params = "nickname")
     Page<User> findAllByNicknameLike(@RequestParam("nickname") String nickname,
                                      @PageableDefault Pageable pageable);
 

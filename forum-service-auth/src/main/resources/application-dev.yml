@@ -35,7 +35,7 @@ spring:
       type: web
 logging:
   level:
-    site.rhys.forum.service.auth: info
+    site.rhys.forum.service.auth: debug
 feign:
   hystrix:
     enabled: true

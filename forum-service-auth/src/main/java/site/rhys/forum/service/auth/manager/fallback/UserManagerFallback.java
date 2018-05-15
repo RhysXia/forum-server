@@ -1,4 +1,4 @@
-package site.rhys.forum.service.article.manager.fallback;
+package site.rhys.forum.service.auth.manager.fallback;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -6,7 +6,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
-import site.rhys.forum.service.article.manager.UserManager;
+import site.rhys.forum.service.auth.manager.UserManager;
 import site.rhys.forum.service.user.api.dto.UserDto;
 import site.rhys.forum.service.user.api.model.User;
 
@@ -15,7 +15,7 @@ import java.util.Collections;
 /**
  * @author Rhys Xia<xrs4433@outlook.com>
  * @version 1.0.0
- * @date 2018/05/09 22:35
+ * @date 2018/05/15 23:05
  * @since 1.0.0
  */
 @Component
@@ -43,7 +43,7 @@ public class UserManagerFallback implements UserManager {
 
     @Override
     public User findByUsernameAndPassword(String username, String password) {
-        log.error("findByUsernameAndPassword: username-> {}, password-> {}", username,password);
+        log.error("findByUsernameAndPassword: username-> {}, password-> {}", username, password);
         return null;
     }
 

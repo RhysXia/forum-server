@@ -10,4 +10,7 @@ import site.rhys.forum.service.auth.api.model.RolePermission;
  * @since 1.0.0
  */
 public interface RolePermissionRepository extends JpaRepository<RolePermission, Long> {
+    Long countByPermissionId(Long id);
+
+    int deleteByRoleId(Long id);
 }

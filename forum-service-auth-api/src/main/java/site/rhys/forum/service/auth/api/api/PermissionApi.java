@@ -24,7 +24,7 @@ public interface PermissionApi {
     Page<Permission> findAll(@PageableDefault Pageable pageable);
 
     @ApiOperation(value = "查询指定角色的权限")
-    @GetMapping
+    @GetMapping(params = "roleId")
     Page<Permission> findAllByRoleId(@RequestParam("roleId") Long roleId,
                                      @PageableDefault Pageable pageable);
 

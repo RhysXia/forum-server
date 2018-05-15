@@ -42,6 +42,11 @@ public class UserController implements UserApi {
     }
 
     @Override
+    public User findByUsernameAndPassword(String username, String password) {
+        return userService.findByUsernameAndPassword(username,password);
+    }
+
+    @Override
     public Page<User> findAllByUsernameLike(String username, Pageable pageable) {
         log.debug("findAllByUsernameLike: username-> {},pageable-> {}", username, pageable);
         return userService.findAllByUsernameLike(username, pageable);

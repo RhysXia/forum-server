@@ -1,5 +1,9 @@
 package site.rhys.forum.service.auth.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import site.rhys.forum.service.auth.api.dto.RoleDto;
+import site.rhys.forum.service.auth.api.model.Permission;
 import site.rhys.forum.service.auth.api.model.Role;
 
 /**
@@ -9,5 +13,15 @@ import site.rhys.forum.service.auth.api.model.Role;
  * @since 1.0.0
  */
 public interface RoleService {
-    Role selectById(Long id);
+    Page<Role> findAll(Pageable pageable);
+
+    Page<Role> findAllByUserId(Long userId, Pageable pageable);
+
+    Role findById(Long id);
+
+    Long add(RoleDto roleDto);
+
+    void updateSelectionById(Long id, RoleDto roleDto);
+
+    void deleteById(Long id);
 }

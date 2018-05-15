@@ -33,7 +33,7 @@ public interface CommentApi {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "articleId", value = "文章的id", required = true, paramType = "path", dataType = "long"),
     })
-    @GetMapping
+    @GetMapping(params = "articleId")
     Page<Comment> findAllByArticleId(@RequestParam("articleId") Long articleId,
                                      @PageableDefault Pageable pageable);
 
@@ -41,7 +41,7 @@ public interface CommentApi {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "authorId", value = "作者的id", required = true, paramType = "path", dataType = "long"),
     })
-    @GetMapping
+    @GetMapping(params = "authorId")
     Page<Comment> findAllByAuthorId(@RequestParam("authorId") Long authorId,
                                      @PageableDefault Pageable pageable);
 
@@ -50,7 +50,7 @@ public interface CommentApi {
             @ApiImplicitParam(name = "parentId", value = "父分类的id", required = true, paramType = "query", dataType = "long"),
 
     })
-    @GetMapping
+    @GetMapping(params = "parentId")
     Page<Comment> findAllByParentId(@RequestParam("parentId") Long parentId, @PageableDefault Pageable pageable);
 
     @ApiOperation(value = "添加评论,返回成功后的id")

@@ -19,7 +19,6 @@ import java.util.Date;
 public class Token {
 
     @Id
-    @GeneratedValue
     private String id;
 
 

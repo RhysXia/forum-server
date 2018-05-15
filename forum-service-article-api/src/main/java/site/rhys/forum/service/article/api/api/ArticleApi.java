@@ -32,7 +32,7 @@ public interface ArticleApi {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "articleId", value = "文章的id", required = true, paramType = "path", dataType = "long"),
     })
-    @GetMapping
+    @GetMapping(params = "authorId")
     Page<Article> findAllByAuthorId(@RequestParam("authorId") Long authorId,
                                     @PageableDefault Pageable pageable);
 
@@ -42,8 +42,7 @@ public interface ArticleApi {
             @ApiImplicitParam(name = "categoryId", value = "分类的id", required = true, paramType = "path", dataType = "long"),
 
     })
-
-    @GetMapping
+    @GetMapping(params = "categoryId")
     Page<Article> findAllByCategoryId(@RequestParam("categoryId") Long categoryId,
                                       @PageableDefault Pageable pageable);
 
@@ -79,6 +78,6 @@ public interface ArticleApi {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "categoryId", value = "分类的id", required = true, paramType = "query", dataType = "long")
     })
-    @DeleteMapping
+    @DeleteMapping(params = "categoryId")
     void deleteAllByCategoryId(@RequestParam("categoryId") Long categoryId);
 }
