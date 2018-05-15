@@ -1,12 +1,10 @@
 package site.rhys.forum.service.user.api.api;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import site.rhys.forum.service.user.api.model.User;
 
@@ -23,9 +21,10 @@ public interface UserApi {
 
     @ApiOperation(value = "根据用户id查找用户")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "请求的用户的id", required = true,dataType = "long")
+            @ApiImplicitParam(name = "id", value = "请求的用户的id", required = true, dataType = "long")
     })
     @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     User findById(@PathVariable("id") Long id);
 
     @ApiOperation(value = "分页查找用户")
@@ -34,33 +33,31 @@ public interface UserApi {
             @ApiImplicitParam(name = "size", value = "每页数据条数", defaultValue = "10", required = false, paramType = "query", dataType = "integer"),
             @ApiImplicitParam(name = "sort", value = "排序方式", example = "id,DESC", required = false, paramType = "query", dataType = "array"),
     })
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping
     Page<User> findByPage(@PageableDefault Pageable pageable);
 
     @ApiOperation(value = "新建用户")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "username", value = "用户名", required = true, paramType = "body"),
-            @ApiImplicitParam(name = "password", value = "密码", required = true, paramType = "body"),
-            @ApiImplicitParam(name = "nickname", value = "昵称", required = true, paramType = "body"),
-            @ApiImplicitParam(name = "info", value = "简介", required = true, paramType = "body"),
-            @ApiImplicitParam(name = "status", value = "用户状态", required = true, paramType = "body")
+            @ApiImplicitParam(name = "username", required = true),
+            @ApiImplicitParam(name = "password", required = true),
+            @ApiImplicitParam(name = "nickname", required = true),
+            @ApiImplicitParam(name = "status", required = true),
+            @ApiImplicitParam(name = "info", required = false),
     })
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "添加成功，返回用户id")
+    })
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    void add(@RequestBody User user);
+    Long add(@RequestBody User user);
 
-    @ApiOperation(value = "修改用户")
+    @ApiOperation(value = "修改用户所有不为null的属性")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "需要修改的用户id", required = true, paramType = "path"),
-            @ApiImplicitParam(name = "selection", value = "true：只修改传值不为空的字段，false：修改所有字段", required = false, paramType = "query"),
-            @ApiImplicitParam(name = "username", value = "用户名", required = false, paramType = "body"),
-            @ApiImplicitParam(name = "password", value = "密码", required = false, paramType = "body"),
-            @ApiImplicitParam(name = "nickname", value = "昵称", required = false, paramType = "body"),
-            @ApiImplicitParam(name = "info", value = "简介", required = false, paramType = "body"),
-            @ApiImplicitParam(name = "status", value = "用户状态", required = false, paramType = "body")
-
     })
-    @PutMapping("/{id}")
-    void updateById(@RequestParam(value = "selection", required = false, defaultValue = "true") Boolean selection, @PathVariable("id") Long id, @RequestBody User user);
-
+    @ResponseStatus(HttpStatus.CREATED)
+    @PutMapping(value = "/{id}")
+    void updateSelectionById(@PathVariable("id") Long id, @RequestBody User user);
 
 }

@@ -1,12 +1,12 @@
 server:
-  port: 9010
+  port: 8020
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8000/eureka/
 spring:
   application:
-    name: service-auth
+    name: system-zipkin
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
@@ -21,21 +21,20 @@ spring:
       filters: stat,wall,log4j,config
       stat-view-servlet:
         reset-enable: false
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-  sleuth:
-    sampler:
-      percentage: 1
-    enabled: true
-  zipkin:
-    base-url: http://system-zipkin/
-    sender:
-      type: web
+#    schema: classpath:zipkin.sql
 logging:
   level:
     site.rhys.forum.service.auth: info
 feign:
   hystrix:
     enabled: true
+zipkin:
+  storage:
+    type: mysql
+    mysql:
+      host: localhost
+      port: 3306
+      username: root
+      password: root
+      db: forum
+

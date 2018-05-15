@@ -28,9 +28,17 @@ public interface UserService {
     Page<User> findByPage(Pageable pageable);
 
     /**
-     * 添加用户
+     * 添加用户,返回添加完成的用户
      *
      * @param user
      */
-    void add(User user);
+    User add(User user);
+
+    /**
+     * 根据id更新非空字段
+     *
+     * @param id
+     * @param user
+     */
+    void updateSelectionById(Long id, User user);
 }

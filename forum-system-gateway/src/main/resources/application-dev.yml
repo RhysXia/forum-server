@@ -7,6 +7,14 @@ eureka:
 spring:
   application:
     name: system-gateway
+  sleuth:
+    sampler:
+      percentage: 1
+    enabled: true
+  zipkin:
+    base-url: http://system-zipkin/
+    sender:
+      type: web
 logging:
   level:
     site.rhys.forum.service.auth: info

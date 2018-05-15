@@ -21,24 +21,29 @@ public class UserController implements UserApi {
     @Autowired
     private UserService userService;
 
+
     @Override
     public User findById(Long id) {
-        log.debug("findById:{}", id);
+        log.debug("findById: {}", id);
         return userService.findById(id);
     }
 
     @Override
     public Page<User> findByPage(Pageable pageable) {
+        log.debug("findByPage: {}", pageable);
         return userService.findByPage(pageable);
     }
 
     @Override
-    public void add(User user) {
-        userService.add(user);
+    public Long add(User user) {
+        log.debug("add: {}", user);
+        User newUser = userService.add(user);
+        return newUser.getId();
     }
 
     @Override
-    public void updateById(Boolean selection, Long id, User user) {
-
+    public void updateSelectionById(Long id, User user) {
+        log.debug("updateSelectionById: id-> {},user-> {}", id, user);
+        userService.updateSelectionById(id, user);
     }
 }

@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import site.rhys.forum.service.auth.api.dto.LoginDto;
+import site.rhys.forum.service.auth.api.model.Token;
 
 /**
  * @author Rhys Xia<xrs4433@outlook.com>
@@ -19,11 +20,11 @@ public interface TokenApi {
 
     @ApiOperation(value = "创建token，登录")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "username", value = "用户名", required = true),
-            @ApiImplicitParam(name = "password", value = "密码", required = true),
+            @ApiImplicitParam(name = "username", required = true),
+            @ApiImplicitParam(name = "password", required = true),
     })
     @PostMapping
-    String signIn(@RequestBody LoginDto loginDto);
+    Token signIn(@RequestBody LoginDto loginDto);
 
     @ApiOperation(value = "删除token，注销")
     @DeleteMapping("/{token}")

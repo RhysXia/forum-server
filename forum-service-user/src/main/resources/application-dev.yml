@@ -1,5 +1,5 @@
 server:
-  port: 8020
+  port: 9000
 eureka:
   client:
     service-url:
@@ -25,6 +25,19 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: admin
+#    password: admin
+  sleuth:
+    sampler:
+      percentage: 1
+    enabled: true
+  zipkin:
+    base-url: http://system-zipkin/
+    sender:
+      type: web
 logging:
   level:
     site.rhys.forum.service.user: debug

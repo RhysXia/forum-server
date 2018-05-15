@@ -17,6 +17,7 @@ import site.rhys.forum.service.user.api.model.User;
 @RequestMapping
 public class UserManagerFallback implements UserManager{
 
+
     @Override
     public User findById(Long id) {
         return null;
@@ -28,12 +29,12 @@ public class UserManagerFallback implements UserManager{
     }
 
     @Override
-    public void add(User user) {
-
+    public Long add(User user) {
+        return null;
     }
 
     @Override
-    public void updateById(Boolean selection, Long id, User user) {
+    public void updateSelectionById(Long id, User user) {
 
     }
 }

@@ -1,6 +1,8 @@
 package site.rhys.forum.service.user.api.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -14,23 +16,34 @@ import java.util.Date;
  */
 @Data
 @Entity
+@ApiModel("用户")
 public class User {
+    @ApiModelProperty("id,不需要传入，自动生成")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @ApiModelProperty("用户名")
     private String username;
 
+    @ApiModelProperty("密码")
     @JsonIgnore
     private String password;
 
+    @ApiModelProperty("昵称")
     private String nickname;
+
+    @ApiModelProperty("用户状态")
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;
 
     /**
      * 简介
      */
+    @ApiModelProperty("简介")
     private String info;
 
+    @ApiModelProperty("创建时间")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createAt;
 }

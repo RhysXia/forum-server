@@ -3,6 +3,14 @@ server:
 spring:
   application:
     name: system-center
+  sleuth:
+    sampler:
+      percentage: 1
+    enabled: true
+  zipkin:
+    base-url: http://system-zipkin/
+    sender:
+      type: web
 eureka:
   client:
     fetch-registry: false
@@ -11,3 +19,6 @@ eureka:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
   instance:
     hostname: localhost
+management:
+  security:
+    enabled: false

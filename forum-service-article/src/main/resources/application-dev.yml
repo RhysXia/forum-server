@@ -1,5 +1,5 @@
 server:
-  port: 8040
+  port: 9020
 eureka:
   client:
     service-url:
@@ -25,6 +25,14 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+  sleuth:
+    sampler:
+      percentage: 1
+    enabled: true
+  zipkin:
+    base-url: http://system-zipkin/
+    sender:
+      type: web
 logging:
   level:
     site.rhys.forum.service.article: info

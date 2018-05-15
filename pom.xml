@@ -25,6 +25,7 @@
         <module>forum-service-auth</module>
         <module>forum-service-article-api</module>
         <module>forum-service-article</module>
+        <module>forum-system-zipkin</module>
     </modules>
 
     <properties>
@@ -110,6 +111,11 @@
             <dependency>
                 <groupId>site.rhys.forum</groupId>
                 <artifactId>forum-service-article</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>site.rhys.forum</groupId>
+                <artifactId>forum-system-zipkin</artifactId>
                 <version>1.0.0</version>
             </dependency>
             <!--//-->
