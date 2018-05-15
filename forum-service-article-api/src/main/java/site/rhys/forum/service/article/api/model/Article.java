@@ -64,7 +64,7 @@ public class Article {
     private Long authorId;
 
     /**
-     * 作者id
+     * 分类id
      */
     private Long categoryId;
 }

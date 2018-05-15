@@ -1,5 +1,7 @@
 package site.rhys.forum.service.user.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import site.rhys.forum.service.user.api.model.User;
 
@@ -10,4 +12,9 @@ import site.rhys.forum.service.user.api.model.User;
  * @since 1.0.0
  */
 public interface UserRepository extends JpaRepository<User, Long> {
+    User findByUsername(String username);
+
+    Page<User> findAllByUsernameLike(String username, Pageable pageable);
+
+    Page<User> findByNicknameLike(String nickname, Pageable pageable);
 }

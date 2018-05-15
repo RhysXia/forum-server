@@ -2,6 +2,7 @@ package site.rhys.forum.service.user.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import site.rhys.forum.service.user.api.dto.UserDto;
 import site.rhys.forum.service.user.api.model.User;
 
 /**
@@ -28,11 +29,37 @@ public interface UserService {
     Page<User> findByPage(Pageable pageable);
 
     /**
+     * 根据用户名查找用户
+     *
+     * @param username
+     * @return
+     */
+    User findByUsername(String username);
+
+    /**
+     * 根据用户名模糊查找用户
+     *
+     * @param username
+     * @return
+     */
+    Page<User> findAllByUsernameLike(String username, Pageable pageable);
+
+
+    /**
+     * 根据昵称模糊查找用户
+     *
+     * @param nickname
+     * @return
+     */
+    Page<User> findAllByNicknameLike(String nickname, Pageable pageable);
+
+    /**
      * 添加用户,返回添加完成的用户
      *
      * @param user
+     * @return 用户id
      */
-    User add(User user);
+    Long add(UserDto user);
 
     /**
      * 根据id更新非空字段
@@ -40,5 +67,6 @@ public interface UserService {
      * @param id
      * @param user
      */
-    void updateSelectionById(Long id, User user);
+    void updateSelectionById(Long id, UserDto user);
+
 }

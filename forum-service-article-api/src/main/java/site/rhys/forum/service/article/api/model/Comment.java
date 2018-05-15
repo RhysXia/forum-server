@@ -42,12 +42,6 @@ public class Comment {
     private Date createAt;
 
     /**
-     * 更新时间
-     */
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updateAt;
-
-    /**
      * 作者id
      */
     private Long authorId;

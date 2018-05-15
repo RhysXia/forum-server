@@ -13,6 +13,9 @@ import java.util.Date;
  */
 @Data
 @Entity
+@Table(indexes = {
+        @Index(columnList = "userId")
+})
 public class Token {
 
     @Id

@@ -1,17 +1,15 @@
 package site.rhys.forum.service.article.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import site.rhys.forum.service.article.api.api.ArticleApi;
+import site.rhys.forum.service.article.api.dto.AddArticleDto;
+import site.rhys.forum.service.article.api.dto.UpdateArticleDto;
 import site.rhys.forum.service.article.api.model.Article;
-import site.rhys.forum.service.article.api.model.Comment;
-import site.rhys.forum.service.article.manager.UserManager;
 import site.rhys.forum.service.article.service.ArticleService;
-import site.rhys.forum.service.user.api.model.User;
 
 /**
  * @author Rhys Xia<xrs4433@outlook.com>
@@ -20,46 +18,58 @@ import site.rhys.forum.service.user.api.model.User;
  * @since 1.0.0
  */
 @RestController
+@Slf4j
 public class ArticleController implements ArticleApi {
     @Autowired
     private ArticleService articleService;
-    @Autowired
-    private UserManager userManager;
+
 
     @Override
-    public Page<Article> findByPage(Pageable pageable) {
-
-        return articleService.findByPage(pageable);
+    public Page<Article> findAll(Pageable pageable) {
+        log.debug("findAll: pageable-> {}", pageable);
+        return articleService.findAll(pageable);
     }
 
     @Override
-    public Page<Comment> findArticlesByPage(Long articleIds, Pageable pageable) {
-        return null;
+    public Page<Article> findAllByAuthorId(Long authorId, Pageable pageable) {
+        log.debug("findAllByAuthorId: authorId-> {}, pageable-> {}", authorId, pageable);
+        return articleService.findAllByAuthorId(authorId, pageable);
+    }
+
+    @Override
+    public Page<Article> findAllByCategoryId(Long categoryId, Pageable pageable) {
+        log.debug("findAllByCategoryId: categoryId-> {}, pageable-> {}", categoryId, pageable);
+        return articleService.findAllByCategoryId(categoryId, pageable);
     }
 
     @Override
     public Article findById(Long id) {
+        log.debug("findById: id-> {}", id);
         return articleService.findById(id);
     }
 
     @Override
-    public void add(Article article) {
-
+    public Long add(AddArticleDto article) {
+        log.debug("findById: article-> {}", article);
+        return articleService.add(article);
     }
 
     @Override
-    public void update(Boolean selection, Long id, Article article) {
+    public void updateSelectionById(Long id, UpdateArticleDto article) {
+        log.debug("updateSelectionById: id-> {}, article-> {}", id, article);
+        articleService.updateSelectionById(id, article);
 
     }
 
     @Override
     public void deleteById(Long id) {
-
+        log.debug("deleteById: id-> {}", id);
+        articleService.deleteById(id);
     }
 
-    @GetMapping("/test/{id}")
-    public User test(@PathVariable("id") Long id) {
-        return userManager.findById(id);
+    @Override
+    public void deleteAllByCategoryId(Long categoryId) {
+        log.debug("deleteAllByCategoryId: categoryId-> {}", categoryId);
+        articleService.deleteAllByCategoryId(categoryId);
     }
-
 }

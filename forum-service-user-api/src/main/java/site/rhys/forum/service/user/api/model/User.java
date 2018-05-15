@@ -1,6 +1,5 @@
 package site.rhys.forum.service.user.api.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -27,15 +26,22 @@ public class User {
     private String username;
 
     @ApiModelProperty("密码")
-    @JsonIgnore
     private String password;
 
     @ApiModelProperty("昵称")
     private String nickname;
 
+    @ApiModelProperty("邮箱")
+    private String email;
+
+    @ApiModelProperty("性别")
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+
     @ApiModelProperty("用户状态")
     @Enumerated(EnumType.STRING)
     private UserStatus status;
+
 
     /**
      * 简介

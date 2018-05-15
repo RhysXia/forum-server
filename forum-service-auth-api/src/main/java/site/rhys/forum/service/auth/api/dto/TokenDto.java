@@ -14,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @ApiModel("登录用户")
-public class LoginDto {
+public class TokenDto {
     @ApiModelProperty(value = "用户名")
     private String username;
 

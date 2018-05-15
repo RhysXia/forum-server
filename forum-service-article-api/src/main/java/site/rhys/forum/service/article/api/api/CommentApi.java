@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
+import site.rhys.forum.service.article.api.dto.AddCommentDto;
 import site.rhys.forum.service.article.api.model.Comment;
 
 /**
@@ -27,38 +28,34 @@ public interface CommentApi {
     @GetMapping("/{id}")
     Comment findById(@PathVariable("id") Long id);
 
+
+    @ApiOperation(value = "分页查询文章下的评论")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "articleId", value = "文章的id", required = true, paramType = "path", dataType = "long"),
+    })
+    @GetMapping
+    Page<Comment> findAllByArticleId(@RequestParam("articleId") Long articleId,
+                                     @PageableDefault Pageable pageable);
+
+    @ApiOperation(value = "查询指定用户的评论")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "authorId", value = "作者的id", required = true, paramType = "path", dataType = "long"),
+    })
+    @GetMapping
+    Page<Comment> findAllByAuthorId(@RequestParam("authorId") Long authorId,
+                                     @PageableDefault Pageable pageable);
+
     @ApiOperation(value = "根据父评论id查询评论")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "parentId", value = "父分类的id", required = true, paramType = "query", dataType = "long"),
-            @ApiImplicitParam(name = "page", value = "请求页", defaultValue = "0", required = false, paramType = "query", dataType = "integer"),
-            @ApiImplicitParam(name = "size", value = "每页数据条数", defaultValue = "10", required = false, paramType = "query", dataType = "integer"),
-            @ApiImplicitParam(name = "sort", value = "排序方式", example = "id,DESC", required = false, paramType = "query", dataType = "array"),
 
     })
     @GetMapping
-    Page<Comment> findChildrenById(@RequestParam("parentId") Long parentId, @PageableDefault Pageable pageable);
+    Page<Comment> findAllByParentId(@RequestParam("parentId") Long parentId, @PageableDefault Pageable pageable);
 
-    @ApiOperation(value = "添加评论")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "content", value = "评论内容", required = true, paramType = "body", dataType = "string"),
-            @ApiImplicitParam(name = "contextType", value = "文章内容类型", required = true, paramType = "body", dataType = "string"),
-            @ApiImplicitParam(name = "authorId", value = "作者id", required = true, paramType = "body", dataType = "long"),
-            @ApiImplicitParam(name = "articleId", value = "文章id", required = true, paramType = "body", dataType = "long"),
-    })
+    @ApiOperation(value = "添加评论,返回成功后的id")
     @PostMapping
-    void add(@RequestBody Comment comment);
-
-    @ApiOperation(value = "修改评论")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "文章的id", required = true, paramType = "path", dataType = "long"),
-            @ApiImplicitParam(name = "selection", value = "true：只修改传值不为空的字段，false：修改所有字段", required = false, paramType = "query"),
-            @ApiImplicitParam(name = "content", value = "评论内容", required = true, paramType = "body", dataType = "string"),
-            @ApiImplicitParam(name = "contextType", value = "文章内容类型", required = true, paramType = "body", dataType = "string"),
-    })
-    @PutMapping("/{id}")
-    void update(@RequestParam(value = "selection", required = false, defaultValue = "true") Boolean selection,
-                @PathVariable("id") Long id,
-                @RequestBody Comment comment);
+    Long add(@RequestBody AddCommentDto comment);
 
     @ApiOperation(value = "删除评论")
     @ApiImplicitParams({

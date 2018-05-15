@@ -1,11 +1,9 @@
 package site.rhys.forum.service.auth.api.api;
 
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
-import site.rhys.forum.service.auth.api.dto.LoginDto;
+import site.rhys.forum.service.auth.api.dto.TokenDto;
 import site.rhys.forum.service.auth.api.model.Token;
 
 /**
@@ -19,12 +17,9 @@ import site.rhys.forum.service.auth.api.model.Token;
 public interface TokenApi {
 
     @ApiOperation(value = "创建token，登录")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "username", required = true),
-            @ApiImplicitParam(name = "password", required = true),
-    })
     @PostMapping
-    Token signIn(@RequestBody LoginDto loginDto);
+    Token signIn(@RequestBody TokenDto tokenDto);
+
 
     @ApiOperation(value = "删除token，注销")
     @DeleteMapping("/{token}")
