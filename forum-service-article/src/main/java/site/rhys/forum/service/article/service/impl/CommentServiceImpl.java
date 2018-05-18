@@ -55,7 +55,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Transactional
     @Override
-    public Long add(AddCommentDto comment) {
+    public Comment add(AddCommentDto comment) {
         if (comment.getContent() == null) {
             log.error("评论内容不能为空");
             throw new IllegalArgumentException("评论内容不能为空");
@@ -110,7 +110,7 @@ public class CommentServiceImpl implements CommentService {
         newComment.setFloorNum(floorNum);
         newComment.setCreateAt(new Date());
 
-        return commentRepository.save(newComment).getId();
+        return commentRepository.save(newComment);
     }
 
     @Transactional

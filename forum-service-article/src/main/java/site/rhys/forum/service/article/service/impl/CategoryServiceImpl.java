@@ -49,7 +49,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Transactional
     @Override
-    public Long add(AddCategoryDto category) {
+    public Category add(AddCategoryDto category) {
 
         if (category.getName() == null) {
             log.error("名称不能为空");
@@ -60,7 +60,7 @@ public class CategoryServiceImpl implements CategoryService {
             throw new IllegalArgumentException("描述不能为空");
         }
         if (category.getAuthorId() != null) {
-            User user = userManager.findById(category.getAuthorId());
+            User user = userManager.findById(category.getAuthorId()).getData();
             if (user == null) {
                 log.error("作者不存在");
                 throw new IllegalArgumentException("作者不存在");
@@ -70,12 +70,12 @@ public class CategoryServiceImpl implements CategoryService {
         BeanUtils.copyProperties(category, newCategory);
         newCategory.setArticleCount(0L);
         newCategory.setCreateAt(new Date());
-        return categoryRepository.save(newCategory).getId();
+        return categoryRepository.save(newCategory);
     }
 
     @Transactional
     @Override
-    public void updateSelectionById(Long id, UpdateCategoryDto category) {
+    public Category updateSelectionById(Long id, UpdateCategoryDto category) {
 
         Category oldCategory = categoryRepository.findOne(id);
 
@@ -91,7 +91,7 @@ public class CategoryServiceImpl implements CategoryService {
             oldCategory.setDescription(category.getDescription());
         }
 
-        categoryRepository.save(oldCategory);
+        return categoryRepository.save(oldCategory);
     }
 
     @Transactional

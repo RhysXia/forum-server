@@ -21,7 +21,7 @@ public interface CommentService {
 
     Page<Comment> findAllByParentId(Long parentId, Pageable pageable);
 
-    Long add(AddCommentDto comment);
+    Comment add(AddCommentDto comment);
 
     void deleteById(Long id);
 }

@@ -11,7 +11,6 @@ import site.rhys.forum.service.article.api.dto.AddArticleDto;
 import site.rhys.forum.service.article.api.dto.UpdateArticleDto;
 import site.rhys.forum.service.article.api.model.Article;
 import site.rhys.forum.service.article.api.model.Category;
-import site.rhys.forum.service.article.manager.UserManager;
 import site.rhys.forum.service.article.repository.ArticleRepository;
 import site.rhys.forum.service.article.repository.CategoryRepository;
 import site.rhys.forum.service.article.service.ArticleService;
@@ -33,8 +32,6 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleRepository articleRepository;
     @Autowired
     private CategoryRepository categoryRepository;
-    @Autowired
-    private UserManager userManager;
 
     @Override
     public Article findById(Long id) {
@@ -58,7 +55,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Transactional
     @Override
-    public Long add(AddArticleDto article) {
+    public Article add(AddArticleDto article) {
         if (article.getTitle() == null) {
             log.error("标题不能为空");
             throw new IllegalArgumentException("标题不能为空");
@@ -102,12 +99,12 @@ public class ArticleServiceImpl implements ArticleService {
         newArticle.setCreateAt(date);
         newArticle.setUpdateAt(date);
 
-        return articleRepository.save(newArticle).getId();
+        return articleRepository.save(newArticle);
     }
 
     @Transactional
     @Override
-    public void updateSelectionById(Long id, UpdateArticleDto article) {
+    public Article updateSelectionById(Long id, UpdateArticleDto article) {
         Article oldArticle = articleRepository.findOne(id);
         if (oldArticle == null) {
             log.error("文章不存在");
@@ -145,7 +142,7 @@ public class ArticleServiceImpl implements ArticleService {
             oldArticle.setCategoryId(article.getCategoryId());
         }
 
-        articleRepository.save(oldArticle);
+        return articleRepository.save(oldArticle);
     }
 
     @Transactional

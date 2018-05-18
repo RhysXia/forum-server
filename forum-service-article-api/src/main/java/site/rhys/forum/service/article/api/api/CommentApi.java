@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
+import site.rhys.forum.common.vo.ResultVo;
 import site.rhys.forum.service.article.api.dto.AddCommentDto;
 import site.rhys.forum.service.article.api.model.Comment;
 
@@ -26,7 +27,7 @@ public interface CommentApi {
             @ApiImplicitParam(name = "id", value = "评论的id", required = true, paramType = "path", dataType = "long")
     })
     @GetMapping("/{id}")
-    Comment findById(@PathVariable("id") Long id);
+    ResultVo<Comment> findById(@PathVariable("id") Long id);
 
 
     @ApiOperation(value = "分页查询文章下的评论")
@@ -34,16 +35,16 @@ public interface CommentApi {
             @ApiImplicitParam(name = "articleId", value = "文章的id", required = true, paramType = "path", dataType = "long"),
     })
     @GetMapping(params = "articleId")
-    Page<Comment> findAllByArticleId(@RequestParam("articleId") Long articleId,
-                                     @PageableDefault Pageable pageable);
+    ResultVo<Page<Comment>> findAllByArticleId(@RequestParam("articleId") Long articleId,
+                                               @PageableDefault Pageable pageable);
 
     @ApiOperation(value = "查询指定用户的评论")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "authorId", value = "作者的id", required = true, paramType = "path", dataType = "long"),
     })
     @GetMapping(params = "authorId")
-    Page<Comment> findAllByAuthorId(@RequestParam("authorId") Long authorId,
-                                     @PageableDefault Pageable pageable);
+    ResultVo<Page<Comment>> findAllByAuthorId(@RequestParam("authorId") Long authorId,
+                                              @PageableDefault Pageable pageable);
 
     @ApiOperation(value = "根据父评论id查询评论")
     @ApiImplicitParams({
@@ -51,16 +52,16 @@ public interface CommentApi {
 
     })
     @GetMapping(params = "parentId")
-    Page<Comment> findAllByParentId(@RequestParam("parentId") Long parentId, @PageableDefault Pageable pageable);
+    ResultVo<Page<Comment>> findAllByParentId(@RequestParam("parentId") Long parentId, @PageableDefault Pageable pageable);
 
     @ApiOperation(value = "添加评论,返回成功后的id")
     @PostMapping
-    Long add(@RequestBody AddCommentDto comment);
+    ResultVo<Comment> add(@RequestBody AddCommentDto comment);
 
     @ApiOperation(value = "删除评论")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "评论的id", required = true, paramType = "path", dataType = "long")
     })
     @DeleteMapping("/{id}")
-    void deleteById(@PathVariable("id") Long id);
+    ResultVo<Void> deleteById(@PathVariable("id") Long id);
 }

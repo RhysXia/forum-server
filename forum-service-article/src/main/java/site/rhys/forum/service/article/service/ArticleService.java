@@ -21,9 +21,9 @@ public interface ArticleService {
 
     Page<Article> findAllByCategoryId(Long categoryId, Pageable pageable);
 
-    Long add(AddArticleDto article);
+    Article add(AddArticleDto article);
 
-    void updateSelectionById(Long id, UpdateArticleDto article);
+    Article updateSelectionById(Long id, UpdateArticleDto article);
 
     void deleteById(Long id);
 

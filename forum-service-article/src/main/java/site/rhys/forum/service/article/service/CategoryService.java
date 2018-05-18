@@ -19,9 +19,9 @@ public interface CategoryService {
 
     Category findById(Long id);
 
-    Long add(AddCategoryDto category);
+    Category add(AddCategoryDto category);
 
-    void updateSelectionById(Long id, UpdateCategoryDto category);
+    Category updateSelectionById(Long id, UpdateCategoryDto category);
 
     void deleteById(Long id);
 }

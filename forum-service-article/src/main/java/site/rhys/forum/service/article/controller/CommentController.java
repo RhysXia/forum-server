@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RestController;
+import site.rhys.forum.common.vo.ResultVo;
 import site.rhys.forum.service.article.api.api.CommentApi;
 import site.rhys.forum.service.article.api.dto.AddCommentDto;
 import site.rhys.forum.service.article.api.model.Comment;
@@ -24,38 +25,44 @@ public class CommentController implements CommentApi {
 
 
     @Override
-    public Page<Comment> findAllByAuthorId(Long authorId, Pageable pageable) {
+    public ResultVo<Page<Comment>> findAllByAuthorId(Long authorId, Pageable pageable) {
         log.debug("findAllByAuthorId: authorId-> {}, pageable-> {}", authorId, pageable);
-        return commentService.findAllByAuthorId(authorId, pageable);
+        Page<Comment> page = commentService.findAllByAuthorId(authorId, pageable);
+        return ResultVo.success("获取评论列表成功", page);
     }
 
     @Override
-    public Comment findById(Long id) {
+    public ResultVo<Comment> findById(Long id) {
         log.debug("findById: id-> {}", id);
-        return commentService.findById(id);
+        Comment comment = commentService.findById(id);
+        return ResultVo.success("获取评论成功", comment);
     }
 
     @Override
-    public Page<Comment> findAllByArticleId(Long articleId, Pageable pageable) {
+    public ResultVo<Page<Comment>> findAllByArticleId(Long articleId, Pageable pageable) {
         log.debug("findAllByArticleId: articleId-> {}, pageable-> {}", articleId, pageable);
-        return commentService.findAllByArticleId(articleId, pageable);
+        Page<Comment> page = commentService.findAllByArticleId(articleId, pageable);
+        return ResultVo.success("获取评论列表成功", page);
     }
 
     @Override
-    public Page<Comment> findAllByParentId(Long parentId, Pageable pageable) {
+    public ResultVo<Page<Comment>> findAllByParentId(Long parentId, Pageable pageable) {
         log.debug("findAllByParentId: parentId-> {}, pageable-> {}", parentId, pageable);
-        return commentService.findAllByParentId(parentId, pageable);
+        Page<Comment> page = commentService.findAllByParentId(parentId, pageable);
+        return ResultVo.success("获取评论列表成功", page);
     }
 
     @Override
-    public Long add(AddCommentDto comment) {
+    public ResultVo<Comment> add(AddCommentDto comment) {
         log.debug("add: category-> {}", comment);
-        return commentService.add(comment);
+        Comment res = commentService.add(comment);
+        return ResultVo.success("添加评论成功", res);
     }
 
     @Override
-    public void deleteById(Long id) {
+    public ResultVo<Void> deleteById(Long id) {
         log.debug("deleteById: id-> {}", id);
         commentService.deleteById(id);
+        return ResultVo.success("删除评论成功", null);
     }
 }

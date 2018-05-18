@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RestController;
+import site.rhys.forum.common.vo.ResultVo;
 import site.rhys.forum.service.article.api.api.CategoryApi;
 import site.rhys.forum.service.article.api.dto.AddCategoryDto;
 import site.rhys.forum.service.article.api.dto.UpdateCategoryDto;
@@ -24,40 +25,46 @@ public class CategoryController implements CategoryApi {
     private CategoryService categoryService;
 
     @Override
-    public Page<Category> findAll(Pageable pageable) {
+    public ResultVo<Page<Category>> findAll(Pageable pageable) {
         log.debug("findAll: pageable-> {}", pageable);
-        return categoryService.findAll(pageable);
+        Page<Category> page = categoryService.findAll(pageable);
+        return ResultVo.success("获取文章分类列表成功", page);
     }
 
     @Override
-    public Page<Category> findAllByAuthorId(Long authorId, Pageable pageable) {
+    public ResultVo<Page<Category>> findAllByAuthorId(Long authorId, Pageable pageable) {
         log.debug("findAllByAuthorId: authorId-> {}, pageable-> {}", authorId, pageable);
-        return categoryService.findAllByAuthorId(authorId, pageable);
+        Page<Category> page = categoryService.findAllByAuthorId(authorId, pageable);
+        return ResultVo.success("获取文章分类列表成功", page);
     }
 
     @Override
-    public Category findById(Long id) {
+    public ResultVo<Category> findById(Long id) {
         log.debug("findById: id-> {}", id);
-        return categoryService.findById(id);
+        Category category = categoryService.findById(id);
+        return ResultVo.success("获取文章分类成功", category);
     }
 
     @Override
-    public Long add(AddCategoryDto category) {
+    public ResultVo<Category> add(AddCategoryDto category) {
         log.debug("add: category-> {}", category);
-        return categoryService.add(category);
+        Category res = categoryService.add(category);
+        return ResultVo.success("添加文章分类成功", res);
     }
 
     @Override
-    public void updateSelectionById(Long id, UpdateCategoryDto category) {
+    public ResultVo<Category> updateSelectionById(Long id, UpdateCategoryDto category) {
         log.debug("updateSelectionById: id-> {}, category-> {}", id, category);
 
-        categoryService.updateSelectionById(id, category);
+        Category res = categoryService.updateSelectionById(id, category);
+        return ResultVo.success("更新文章分类成功", res);
     }
 
     @Override
-    public void deleteById(Long id) {
+    public ResultVo<Void> deleteById(Long id) {
         log.debug("deleteById: id-> {}", id);
 
         categoryService.deleteById(id);
+        return ResultVo.success("删除文章分类成功", null);
     }
 }
