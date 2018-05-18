@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public void updateSelectionById(Long id, UserDto user) {
+    public User updateSelectionById(Long id, UserDto user) {
         User oldUser = userRepository.findOne(id);
         if (oldUser == null) {
             log.error("id为{}的用户不存在", id);
@@ -89,7 +89,7 @@ public class UserServiceImpl implements UserService {
             String encryptPassword = SecurityUtils.encrypt(user.getPassword());
             oldUser.setPassword(encryptPassword);
         }
-        userRepository.save(oldUser);
+        return userRepository.save(oldUser);
     }
 
     @Override
@@ -104,7 +104,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public Long add(UserDto user) {
+    public User add(UserDto user) {
 
         User newUser = new User();
 
@@ -128,6 +128,11 @@ public class UserServiceImpl implements UserService {
             log.error("密码不能为空");
             throw new IllegalArgumentException("密码不能为空");
         }
+        if (user.getGender() == null) {
+            log.error("性别不能为空");
+            throw new IllegalArgumentException("性别不能为空");
+        }
+
         if (user.getEmail() != null && !user.getEmail().matches("^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+$")) {
             log.error("email格式不正确");
             throw new IllegalArgumentException("email格式不正确");
@@ -139,6 +144,6 @@ public class UserServiceImpl implements UserService {
 
         newUser.setCreateAt(new Date());
 
-        return userRepository.save(newUser).getId();
+        return userRepository.save(newUser);
     }
 }

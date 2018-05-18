@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import site.rhys.forum.service.auth.api.model.Role;
 
+import java.util.List;
+
 /**
  * @author Rhys Xia<xrs4433@outlook.com>
  * @version 1.0.0
@@ -14,6 +16,5 @@ import site.rhys.forum.service.auth.api.model.Role;
  * @since 1.0.0
  */
 public interface RoleRepository extends JpaRepository<Role, Long> {
-    @Query("select r from Role r left join UserRole ur on r.id = ur.roleId where ur.userId = :userId")
-    Page<Role> findAllByUserId(@Param("userId") Long userId, Pageable pageable);
+    Page<Role> findAllByIdIn(List<Long> roleIds, Pageable pageable);
 }

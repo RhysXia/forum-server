@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RestController;
+import site.rhys.forum.common.vo.ResultVo;
 import site.rhys.forum.service.user.api.api.UserApi;
 import site.rhys.forum.service.user.api.dto.UserDto;
 import site.rhys.forum.service.user.api.model.User;
@@ -24,50 +25,58 @@ public class UserController implements UserApi {
 
 
     @Override
-    public User findById(Long id) {
+    public ResultVo<User> findById(Long id) {
         log.debug("findById: id-> {}", id);
-        return userService.findById(id);
+        User user = userService.findById(id);
+        return ResultVo.success("获取用户信息成功", user);
     }
 
     @Override
-    public Page<User> findAll(Pageable pageable) {
+    public ResultVo<Page<User>> findAll(Pageable pageable) {
         log.debug("findAll: pageable-> {}", pageable);
-        return userService.findByPage(pageable);
+        Page<User> page = userService.findByPage(pageable);
+        return ResultVo.success("获取用户列表成功", page);
     }
 
     @Override
-    public User findByUsername(String username) {
+    public ResultVo<User> findByUsername(String username) {
         log.debug("findByUsername: username-> {}", username);
-        return userService.findByUsername(username);
+        User user = userService.findByUsername(username);
+        return ResultVo.success("获取用户成功", user);
     }
 
     @Override
-    public User findByUsernameAndPassword(String username, String password) {
-        return userService.findByUsernameAndPassword(username,password);
+    public ResultVo<User> findByUsernameAndPassword(String username, String password) {
+        User user = userService.findByUsernameAndPassword(username, password);
+        return ResultVo.success("获取用户成功", user);
     }
 
     @Override
-    public Page<User> findAllByUsernameLike(String username, Pageable pageable) {
+    public ResultVo<Page<User>> findAllByUsernameLike(String username, Pageable pageable) {
         log.debug("findAllByUsernameLike: username-> {},pageable-> {}", username, pageable);
-        return userService.findAllByUsernameLike(username, pageable);
+        Page<User> page = userService.findAllByUsernameLike(username, pageable);
+        return ResultVo.success("获取用户列表成功", page);
     }
 
     @Override
-    public Page<User> findAllByNicknameLike(String nickname, Pageable pageable) {
+    public ResultVo<Page<User>> findAllByNicknameLike(String nickname, Pageable pageable) {
         log.debug("findAllByUsernameLike: nickname-> {},pageable-> {}", nickname, pageable);
-        return userService.findAllByNicknameLike(nickname, pageable);
+        Page<User> page = userService.findAllByNicknameLike(nickname, pageable);
+        return ResultVo.success("获取用户列表成功", page);
     }
 
     @Override
-    public Long add(UserDto user) {
+    public ResultVo<User> add(UserDto user) {
         log.debug("add: user-> {}", user);
-        return userService.add(user);
+        User res = userService.add(user);
+        return ResultVo.success("添加用户成功", res);
     }
 
     @Override
-    public void updateSelectionById(Long id, UserDto user) {
+    public ResultVo<User> updateSelectionById(Long id, UserDto user) {
         log.debug("updateSelectionById: id-> {},user-> {}", id, user);
-        userService.updateSelectionById(id, user);
+        User res = userService.updateSelectionById(id, user);
+        return ResultVo.success("更新用户成功", res);
     }
 
 }

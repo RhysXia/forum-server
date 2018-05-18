@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import site.rhys.forum.common.exception.IllegalArgumentException;
 import site.rhys.forum.service.auth.api.dto.PermissionDto;
 import site.rhys.forum.service.auth.api.model.Permission;
+import site.rhys.forum.service.auth.api.model.RolePermission;
 import site.rhys.forum.service.auth.repository.PermissionRepository;
 import site.rhys.forum.service.auth.repository.RolePermissionRepository;
 import site.rhys.forum.service.auth.repository.RoleRepository;
@@ -16,6 +17,8 @@ import site.rhys.forum.service.auth.service.PermissionService;
 
 import javax.transaction.Transactional;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Rhys Xia<xrs4433@outlook.com>
@@ -29,8 +32,6 @@ public class PermissionServiceImpl implements PermissionService {
     @Autowired
     private PermissionRepository permissionRepository;
     @Autowired
-    private RoleRepository roleRepository;
-    @Autowired
     private RolePermissionRepository rolePermissionRepository;
 
     @Override
@@ -40,7 +41,9 @@ public class PermissionServiceImpl implements PermissionService {
 
     @Override
     public Page<Permission> findAllByRoleId(Long roleId, Pageable pageable) {
-        return permissionRepository.findAllByRoleId(roleId, pageable);
+        List<RolePermission> rolePermissionList = rolePermissionRepository.findAllByRoleId(roleId);
+        List<Long> permissionIds = rolePermissionList.stream().map(RolePermission::getPermissionId).collect(Collectors.toList());
+        return permissionRepository.findAllByIdIn(permissionIds, pageable);
     }
 
     @Override

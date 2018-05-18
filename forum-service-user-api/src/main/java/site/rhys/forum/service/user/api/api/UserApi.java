@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
+import site.rhys.forum.common.vo.ResultVo;
 import site.rhys.forum.service.user.api.dto.UserDto;
 import site.rhys.forum.service.user.api.model.User;
 
@@ -26,12 +27,12 @@ public interface UserApi {
             @ApiImplicitParam(name = "id", value = "请求的用户的id", required = true, dataType = "long")
     })
     @GetMapping("/{id}")
-    User findById(@PathVariable("id") Long id);
+    ResultVo<User> findById(@PathVariable("id") Long id);
 
 
     @ApiOperation(value = "分页查找用户")
     @GetMapping
-    Page<User> findAll(@PageableDefault Pageable pageable);
+    ResultVo<Page<User>> findAll(@PageableDefault Pageable pageable);
 
 
     @ApiOperation("根据用户名精确查找指定用户")
@@ -39,7 +40,7 @@ public interface UserApi {
             @ApiImplicitParam(name = "username", value = "用户名", required = true, dataType = "string")
     })
     @GetMapping(params = "username")
-    User findByUsername(@RequestParam("username") String username);
+    ResultVo<User> findByUsername(@RequestParam("username") String username);
 
     @ApiOperation("根据用户名和密码精确查找指定用户")
     @ApiImplicitParams({
@@ -47,8 +48,8 @@ public interface UserApi {
             @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "string")
     })
     @GetMapping(params = {"username", "password"})
-    User findByUsernameAndPassword(@RequestParam("username") String username,
-                                   @RequestParam("password") String password);
+    ResultVo<User> findByUsernameAndPassword(@RequestParam("username") String username,
+                                             @RequestParam("password") String password);
 
 
     @ApiOperation("根据用户名模糊查找用户")
@@ -56,22 +57,22 @@ public interface UserApi {
             @ApiImplicitParam(name = "username", value = "用户名", required = true, dataType = "string")
     })
     @GetMapping(value = "/search", params = "username")
-    Page<User> findAllByUsernameLike(@RequestParam("username") String username,
-                                     @PageableDefault Pageable pageable);
+    ResultVo<Page<User>> findAllByUsernameLike(@RequestParam("username") String username,
+                                               @PageableDefault Pageable pageable);
 
 
     @ApiOperation("根据昵称模糊查找用户")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "nickname", value = "昵称", required = true, dataType = "string")
     })
-    @GetMapping(value = "/search",params = "nickname")
-    Page<User> findAllByNicknameLike(@RequestParam("nickname") String nickname,
-                                     @PageableDefault Pageable pageable);
+    @GetMapping(value = "/search", params = "nickname")
+    ResultVo<Page<User>> findAllByNicknameLike(@RequestParam("nickname") String nickname,
+                                               @PageableDefault Pageable pageable);
 
 
     @ApiOperation(value = "新建用户")
     @PostMapping
-    Long add(@RequestBody UserDto user);
+    ResultVo<User> add(@RequestBody UserDto user);
 
 
     @ApiOperation(value = "修改用户所有不为null的属性")
@@ -79,7 +80,7 @@ public interface UserApi {
             @ApiImplicitParam(name = "id", value = "需要修改的用户id", required = true, paramType = "path"),
     })
     @PutMapping(value = "/{id}", params = "all=false")
-    void updateSelectionById(@PathVariable("id") Long id, @RequestBody UserDto user);
+    ResultVo<User> updateSelectionById(@PathVariable("id") Long id, @RequestBody UserDto user);
 
 
 }

@@ -15,5 +15,9 @@ public enum Gender {
     /**
      * 女
      */
-    FEMALE
+    FEMALE,
+    /**
+     * 未知
+     */
+    UNKNOWN
 }

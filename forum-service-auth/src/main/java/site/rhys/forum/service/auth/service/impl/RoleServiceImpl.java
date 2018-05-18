@@ -10,6 +10,7 @@ import site.rhys.forum.common.exception.IllegalArgumentException;
 import site.rhys.forum.service.auth.api.dto.RoleDto;
 import site.rhys.forum.service.auth.api.model.Role;
 import site.rhys.forum.service.auth.api.model.RolePermission;
+import site.rhys.forum.service.auth.api.model.UserRole;
 import site.rhys.forum.service.auth.repository.PermissionRepository;
 import site.rhys.forum.service.auth.repository.RolePermissionRepository;
 import site.rhys.forum.service.auth.repository.RoleRepository;
@@ -20,6 +21,7 @@ import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Rhys Xia<xrs4433@outlook.com>
@@ -48,7 +50,9 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Page<Role> findAllByUserId(Long userId, Pageable pageable) {
-        return roleRepository.findAllByUserId(userId, pageable);
+        List<UserRole> userRoles = userRoleRepository.findAllByUserId(userId);
+        List<Long> roleIds = userRoles.stream().map(UserRole::getRoleId).collect(Collectors.toList());
+        return roleRepository.findAllByIdIn(roleIds, pageable);
     }
 
     @Override

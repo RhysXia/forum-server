@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import site.rhys.forum.service.auth.api.model.Permission;
 
+import java.util.List;
+
 /**
  * @author Rhys Xia<xrs4433@outlook.com>
  * @version 1.0.0
@@ -15,8 +17,7 @@ import site.rhys.forum.service.auth.api.model.Permission;
  */
 public interface PermissionRepository extends JpaRepository<Permission, Long> {
 
-    @Query("select p from Permission p left join RolePermission rp on p.id = rp.roleId where rp.roleId = :roleId")
-    Page<Permission> findAllByRoleId(@Param("roleId") Long roleId, Pageable pageable);
-
     Long countByIdIn(Long[] permissionIds);
+
+    Page<Permission> findAllByIdIn(List<Long> permissionIds, Pageable pageable);
 }

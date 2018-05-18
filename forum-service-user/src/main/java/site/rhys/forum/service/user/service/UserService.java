@@ -59,7 +59,7 @@ public interface UserService {
      * @param user
      * @return 用户id
      */
-    Long add(UserDto user);
+    User add(UserDto user);
 
     /**
      * 根据id更新非空字段
@@ -67,7 +67,7 @@ public interface UserService {
      * @param id
      * @param user
      */
-    void updateSelectionById(Long id, UserDto user);
+    User updateSelectionById(Long id, UserDto user);
 
     User findByUsernameAndPassword(String username, String password);
 }
