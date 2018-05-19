@@ -42,7 +42,7 @@ public class TokenServiceImpl implements TokenService {
             throw new IllegalArgumentException("密码不能为空");
         }
 
-        User user = userManager.findByUsernameAndPassword(tokenDto.getUsername(), tokenDto.getPassword());
+        User user = userManager.findByUsernameAndPassword(tokenDto.getUsername(), tokenDto.getPassword()).getData();
 
         if (user == null) {
             log.debug("用户名密码有误");

@@ -40,14 +40,8 @@ public class UserController implements UserApi {
 
     @Override
     public ResultVo<User> findByUsername(String username) {
-        log.debug("findByUsername: username-> {}", username);
+        log.debug("findOneByUsername: username-> {}", username);
         User user = userService.findByUsername(username);
-        return ResultVo.success("获取用户成功", user);
-    }
-
-    @Override
-    public ResultVo<User> findByUsernameAndPassword(String username, String password) {
-        User user = userService.findByUsernameAndPassword(username, password);
         return ResultVo.success("获取用户成功", user);
     }
 

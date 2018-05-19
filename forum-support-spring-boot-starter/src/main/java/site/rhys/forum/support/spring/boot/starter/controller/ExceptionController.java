@@ -1,11 +1,9 @@
 package site.rhys.forum.support.spring.boot.starter.controller;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import site.rhys.forum.common.exception.IllegalArgumentException;
-import site.rhys.forum.support.spring.boot.starter.vo.ErrorResultVo;
+import site.rhys.forum.common.vo.ResultVo;
 
 /**
  * @author Rhys Xia<xrs4433@outlook.com>
@@ -17,8 +15,7 @@ import site.rhys.forum.support.spring.boot.starter.vo.ErrorResultVo;
 public class ExceptionController {
 
     @ExceptionHandler(IllegalArgumentException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResultVo IllegalArgumentException(IllegalArgumentException e) {
-        return new ErrorResultVo(e.getMessage());
+    public ResultVo<Void> IllegalArgumentException(IllegalArgumentException e) {
+        return ResultVo.create(ResultVo.CODE_PARAM_ERROR, e.getMessage(), null);
     }
 }

@@ -69,5 +69,4 @@ public interface UserService {
      */
     User updateSelectionById(Long id, UserDto user);
 
-    User findByUsernameAndPassword(String username, String password);
 }

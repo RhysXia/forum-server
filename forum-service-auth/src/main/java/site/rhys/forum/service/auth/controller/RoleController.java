@@ -5,9 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RestController;
+import site.rhys.forum.common.vo.ResultVo;
 import site.rhys.forum.service.auth.api.api.RoleApi;
 import site.rhys.forum.service.auth.api.dto.RoleDto;
-import site.rhys.forum.service.auth.api.model.Permission;
 import site.rhys.forum.service.auth.api.model.Role;
 import site.rhys.forum.service.auth.service.RoleService;
 
@@ -25,40 +25,44 @@ public class RoleController implements RoleApi {
     private RoleService roleService;
 
     @Override
-    public Page<Role> findAll(Pageable pageable) {
+    public ResultVo<Page<Role>> findAll(Pageable pageable) {
         log.debug("findAll: pageable-> {}", pageable);
-        return roleService.findAll(pageable);
+        Page<Role> page = roleService.findAll(pageable);
+        return ResultVo.success("获取角色列表成功", page);
     }
 
     @Override
-    public Page<Role> findAllByUserId(Long userId, Pageable pageable) {
+    public ResultVo<Page<Role>> findAllByUserId(Long userId, Pageable pageable) {
         log.debug("findAllByUserId: userId-> {}, pageable-> {}", userId, pageable);
-        return roleService.findAllByUserId(userId, pageable);
+        Page<Role> page = roleService.findAllByUserId(userId, pageable);
+        return ResultVo.success("获取角色列表成功", page);
     }
 
     @Override
-    public Role findById(Long id) {
+    public ResultVo<Role> findById(Long id) {
         log.debug("findById: id-> {}", id);
-        return roleService.findById(id);
+        Role role = roleService.findById(id);
+        return ResultVo.success("获取角色成功", role);
     }
 
     @Override
-    public Long add(RoleDto roleDto) {
+    public ResultVo<Role> add(RoleDto roleDto) {
         log.debug("add: roleDto-> {}", roleDto);
-        return roleService.add(roleDto);
+        Role role = roleService.add(roleDto);
+        return ResultVo.success("添加角色成功", role);
     }
 
     @Override
-    public void updateSelectionById(Long id, RoleDto roleDto) {
+    public ResultVo<Role> updateSelectionById(Long id, RoleDto roleDto) {
         log.debug("updateSelectionById: id-> {}, roleDto-> {}", id, roleDto);
-
-        roleService.updateSelectionById(id, roleDto);
+        Role role = roleService.updateSelectionById(id, roleDto);
+        return ResultVo.success("更新角色成功", role);
     }
 
     @Override
-    public void deleteById(Long id) {
+    public ResultVo<Void> deleteById(Long id) {
         log.debug("deleteById: id-> {}", id);
-
         roleService.deleteById(id);
+        return ResultVo.success("删除角色成功", null);
     }
 }

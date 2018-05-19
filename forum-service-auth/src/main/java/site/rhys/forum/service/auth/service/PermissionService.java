@@ -18,9 +18,9 @@ public interface PermissionService {
 
     Permission findById(Long id);
 
-    Long add(PermissionDto permissionDto);
+    Permission add(PermissionDto permissionDto);
 
-    void updateSelectionById(Long id, PermissionDto permissionDto);
+    Permission updateSelectionById(Long id, PermissionDto permissionDto);
 
     void deleteById(Long id);
 }

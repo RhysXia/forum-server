@@ -15,9 +15,20 @@ import lombok.Setter;
 @Setter
 public class ResultVo<T> {
     //结果码
+    /**
+     * 请求成功
+     */
     public static final int CODE_SUCCESS = 200;
 
+    /**
+     * 参数错误
+     */
     public static final int CODE_PARAM_ERROR = 400;
+
+    /**
+     * 熔断
+     */
+    public static final int CODE_CIRCUIT_ERROR = 401;
 
 
     /**

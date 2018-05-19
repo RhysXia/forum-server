@@ -1,6 +1,9 @@
 package site.rhys.forum.service.auth.service;
 
 import site.rhys.forum.service.auth.api.dto.UserRoleDto;
+import site.rhys.forum.service.auth.api.model.UserRole;
+
+import java.util.List;
 
 /**
  * @author Rhys Xia<xrs4433@outlook.com>
@@ -9,5 +12,5 @@ import site.rhys.forum.service.auth.api.dto.UserRoleDto;
  * @since 1.0.0
  */
 public interface UserRoleService {
-    void updateByUserId(UserRoleDto userRoleDto);
+    List<UserRole> updateByUserId(UserRoleDto userRoleDto);
 }

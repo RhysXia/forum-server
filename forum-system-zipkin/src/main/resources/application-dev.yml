@@ -21,7 +21,7 @@ spring:
       filters: stat,wall,log4j,config
       stat-view-servlet:
         reset-enable: false
-#    schema: classpath:zipkin.sql
+    schema: classpath:zipkin.sql
 logging:
   level:
     site.rhys.forum.service.auth: info

@@ -5,7 +5,11 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import site.rhys.forum.common.vo.ResultVo;
 import site.rhys.forum.service.auth.api.dto.UserRoleDto;
+import site.rhys.forum.service.auth.api.model.UserRole;
+
+import java.util.List;
 
 /**
  * @author Rhys Xia<xrs4433@outlook.com>
@@ -19,6 +23,6 @@ public interface UserRoleApi {
 
     @ApiOperation("修改用户和角色的关系")
     @PutMapping
-    void updateByUserId(
+    ResultVo<List<UserRole>> updateByUserId(
             @RequestBody UserRoleDto userRoleDto);
 }

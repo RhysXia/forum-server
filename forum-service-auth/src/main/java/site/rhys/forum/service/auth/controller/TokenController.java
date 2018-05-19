@@ -3,6 +3,7 @@ package site.rhys.forum.service.auth.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
+import site.rhys.forum.common.vo.ResultVo;
 import site.rhys.forum.service.auth.api.api.TokenApi;
 import site.rhys.forum.service.auth.api.dto.TokenDto;
 import site.rhys.forum.service.auth.api.model.Token;
@@ -22,14 +23,16 @@ public class TokenController implements TokenApi {
     private TokenService tokenService;
 
     @Override
-    public Token signIn(TokenDto tokenDto) {
+    public ResultVo<Token> signIn(TokenDto tokenDto) {
         log.debug("signIn: tokenDto-> {}", tokenDto);
-        return tokenService.signIn(tokenDto);
+        Token token = tokenService.signIn(tokenDto);
+        return ResultVo.success("获取token成功", token);
     }
 
     @Override
-    public void signOut(String token) {
+    public ResultVo<Void> signOut(String token) {
         log.debug("signOut: token-> {}", token);
         tokenService.signOut(token);
+        return ResultVo.success("注销成功", null);
     }
 }

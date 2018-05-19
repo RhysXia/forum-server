@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
+        return userRepository.findOneByUsername(username);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Page<User> findAllByNicknameLike(String nickname, Pageable pageable) {
-        return userRepository.findByNicknameLike(nickname, pageable);
+        return userRepository.findAllByNicknameLike(nickname, pageable);
     }
 
     @Transactional
@@ -62,7 +62,12 @@ public class UserServiceImpl implements UserService {
             log.error("id为{}的用户不存在", id);
             throw new IllegalArgumentException("id为" + id + "的用户不存在");
         }
-        if (user.getUsername() != null) {
+        if (user.getUsername() != null && !user.getUsername().equals(oldUser.getUsername())) {
+            //判断用户名是否存在
+            if (userRepository.findOneByUsername(user.getUsername()) != null) {
+                log.error("用户名对应的用户已存在");
+                throw new IllegalArgumentException("用户名对应的用户已存在");
+            }
             oldUser.setUsername(user.getUsername());
         }
         if (user.getNickname() != null) {
@@ -77,28 +82,24 @@ public class UserServiceImpl implements UserService {
         if (user.getGender() != null) {
             oldUser.setGender(user.getGender());
         }
-        if (user.getEmail() != null) {
-            if (user.getEmail().matches("^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+$")) {
-                oldUser.setEmail(user.getEmail());
-            } else {
+        if (user.getEmail() != null && !user.getEmail().equals(oldUser.getEmail())) {
+            if (!user.getEmail().matches("^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+$")) {
                 log.error("email格式不正确");
                 throw new IllegalArgumentException("email格式不正确");
             }
+            //判断邮箱是否存在
+            if (user.getEmail() != null && userRepository.findOneByEmail(user.getEmail()) != null) {
+                log.error("邮箱对应的用户已存在");
+                throw new IllegalArgumentException("邮箱对应的用户已存在");
+            }
+
+            oldUser.setEmail(user.getEmail());
         }
         if (user.getPassword() != null) {
             String encryptPassword = SecurityUtils.encrypt(user.getPassword());
             oldUser.setPassword(encryptPassword);
         }
         return userRepository.save(oldUser);
-    }
-
-    @Override
-    public User findByUsernameAndPassword(String username, String password) {
-        if (username == null || password == null) {
-            log.error("用户名密码不能为空");
-            throw new IllegalArgumentException("用户名密码不能为空");
-        }
-        return userRepository.findByUsernameAndPassword(username, SecurityUtils.encrypt(password));
     }
 
 
@@ -138,7 +139,19 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("email格式不正确");
         }
 
+        //判断用户名是否存在
+        if (userRepository.findOneByUsername(user.getUsername()) != null) {
+            log.error("用户名对应的用户已存在");
+            throw new IllegalArgumentException("用户名对应的用户已存在");
+        }
+        //判断邮箱是否存在
+        if (user.getEmail() != null && userRepository.findOneByEmail(user.getEmail()) != null) {
+            log.error("邮箱对应的用户已存在");
+            throw new IllegalArgumentException("邮箱对应的用户已存在");
+        }
+
         BeanUtils.copyProperties(user, newUser);
+        //密码加密
         String encryptPassword = SecurityUtils.encrypt(user.getPassword());
         newUser.setPassword(encryptPassword);
 

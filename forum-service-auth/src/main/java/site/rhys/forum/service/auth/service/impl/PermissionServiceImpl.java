@@ -12,7 +12,6 @@ import site.rhys.forum.service.auth.api.model.Permission;
 import site.rhys.forum.service.auth.api.model.RolePermission;
 import site.rhys.forum.service.auth.repository.PermissionRepository;
 import site.rhys.forum.service.auth.repository.RolePermissionRepository;
-import site.rhys.forum.service.auth.repository.RoleRepository;
 import site.rhys.forum.service.auth.service.PermissionService;
 
 import javax.transaction.Transactional;
@@ -53,7 +52,7 @@ public class PermissionServiceImpl implements PermissionService {
 
     @Transactional
     @Override
-    public Long add(PermissionDto permissionDto) {
+    public Permission add(PermissionDto permissionDto) {
         if (permissionDto.getUrl() == null) {
             log.error("url不能为空");
             throw new IllegalArgumentException("url不能为空");
@@ -65,12 +64,12 @@ public class PermissionServiceImpl implements PermissionService {
         Permission permission = new Permission();
         BeanUtils.copyProperties(permissionDto, permission);
         permission.setCreateAt(new Date());
-        return permissionRepository.save(permission).getId();
+        return permissionRepository.save(permission);
     }
 
     @Transactional
     @Override
-    public void updateSelectionById(Long id, PermissionDto permissionDto) {
+    public Permission updateSelectionById(Long id, PermissionDto permissionDto) {
         Permission permission = permissionRepository.findOne(id);
         if (permission == null) {
             log.error("权限不存在");
@@ -82,7 +81,7 @@ public class PermissionServiceImpl implements PermissionService {
         if (permissionDto.getUrl() != null) {
             permission.setUrl(permissionDto.getUrl());
         }
-        permissionRepository.save(permission);
+        return permissionRepository.save(permission);
     }
 
     @Transactional
@@ -96,7 +95,7 @@ public class PermissionServiceImpl implements PermissionService {
         //判断是否有角色使用
 
         Long count = rolePermissionRepository.countByPermissionId(id);
-        if(count>0){
+        if (count > 0) {
             log.error("权限正在使用,无法删除");
             throw new IllegalArgumentException("权限正在使用,无法删除");
         }

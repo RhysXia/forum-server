@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RestController;
+import site.rhys.forum.common.vo.ResultVo;
 import site.rhys.forum.service.auth.api.api.PermissionApi;
 import site.rhys.forum.service.auth.api.dto.PermissionDto;
 import site.rhys.forum.service.auth.api.model.Permission;
@@ -24,42 +25,47 @@ public class PermissionController implements PermissionApi {
     private PermissionService permissionService;
 
     @Override
-    public Page<Permission> findAll(Pageable pageable) {
+    public ResultVo<Page<Permission>> findAll(Pageable pageable) {
         log.debug("findAll: pageable-> {}", pageable);
-        return permissionService.findAll(pageable);
+        Page<Permission> page = permissionService.findAll(pageable);
+        return ResultVo.success("获取权限列表成功", page);
     }
 
     @Override
-    public Page<Permission> findAllByRoleId(Long roleId, Pageable pageable) {
+    public ResultVo<Page<Permission>> findAllByRoleId(Long roleId, Pageable pageable) {
         log.debug("findAllByRoleId: roleId-> {}, pageable-> {}", roleId, pageable);
 
-        return permissionService.findAllByRoleId(roleId, pageable);
+        Page<Permission> page = permissionService.findAllByRoleId(roleId, pageable);
+        return ResultVo.success("获取权限列表成功", page);
     }
 
     @Override
-    public Permission findById(Long id) {
+    public ResultVo<Permission> findById(Long id) {
         log.debug("findById: id-> {}", id);
-        return permissionService.findById(id);
+        Permission permission = permissionService.findById(id);
+        return ResultVo.success("获取权限成功", permission);
     }
 
     @Override
-    public Long add(PermissionDto permissionDto) {
+    public ResultVo<Permission> add(PermissionDto permissionDto) {
         log.debug("add: permissionDto-> {}", permissionDto);
 
-        return permissionService.add(permissionDto);
+        Permission permission = permissionService.add(permissionDto);
+        return ResultVo.success("添加权限成功", permission);
     }
 
     @Override
-    public void updateSelectionById(Long id, PermissionDto permissionDto) {
+    public ResultVo<Permission> updateSelectionById(Long id, PermissionDto permissionDto) {
         log.debug("updateSelectionById: id-> {}, permissionDto-> {}", id, permissionDto);
 
-        permissionService.updateSelectionById(id, permissionDto);
+        Permission permission = permissionService.updateSelectionById(id, permissionDto);
+        return ResultVo.success("更新权限成功", permission);
     }
 
     @Override
-    public void deleteById(Long id) {
+    public ResultVo<Void> deleteById(Long id) {
         log.debug("deleteById: id-> {}", id);
-
         permissionService.deleteById(id);
+        return ResultVo.success("删除权限成功", null);
     }
 }

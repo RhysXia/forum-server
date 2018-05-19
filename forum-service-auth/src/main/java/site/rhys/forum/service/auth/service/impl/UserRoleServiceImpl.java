@@ -32,7 +32,7 @@ public class UserRoleServiceImpl implements UserRoleService {
 
     @Transactional
     @Override
-    public void updateByUserId(UserRoleDto userRoleDto) {
+    public List<UserRole> updateByUserId(UserRoleDto userRoleDto) {
         if (userRoleDto.getUserId() == null) {
             log.error("用户id不能为空");
             throw new IllegalArgumentException("用户id不能为空");
@@ -42,7 +42,7 @@ public class UserRoleServiceImpl implements UserRoleService {
             throw new IllegalArgumentException("角色id数组不能为空");
         }
 
-        User user = userManager.findById(userRoleDto.getUserId());
+        User user = userManager.findById(userRoleDto.getUserId()).getData();
         if (user == null) {
             log.error("用户不存在");
             throw new IllegalArgumentException("用户不存在");
@@ -57,6 +57,6 @@ public class UserRoleServiceImpl implements UserRoleService {
             userRole.setRoleId(roleId);
             userRoleList.add(userRole);
         }
-        userRoleRepository.save(userRoleList);
+        return userRoleRepository.save(userRoleList);
     }
 }

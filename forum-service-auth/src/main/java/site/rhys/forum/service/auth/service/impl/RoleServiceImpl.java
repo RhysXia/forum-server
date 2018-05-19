@@ -62,7 +62,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Transactional
     @Override
-    public Long add(RoleDto roleDto) {
+    public Role add(RoleDto roleDto) {
         if (roleDto.getName() == null) {
             log.error("名称不能为空");
             throw new IllegalArgumentException("名称不能为空");
@@ -101,12 +101,12 @@ public class RoleServiceImpl implements RoleService {
 
         }
 
-        return newRole.getId();
+        return newRole;
     }
 
     @Transactional
     @Override
-    public void updateSelectionById(Long id, RoleDto roleDto) {
+    public Role updateSelectionById(Long id, RoleDto roleDto) {
         Role role = roleRepository.findOne(id);
         if (role == null) {
             log.error("角色不存在");
@@ -133,7 +133,7 @@ public class RoleServiceImpl implements RoleService {
             rolePermissionRepository.save(rolePermissionList);
         }
 
-        roleRepository.save(role);
+        return roleRepository.save(role);
     }
 
     @Transactional

@@ -2,9 +2,13 @@ package site.rhys.forum.service.auth.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
+import site.rhys.forum.common.vo.ResultVo;
 import site.rhys.forum.service.auth.api.api.UserRoleApi;
 import site.rhys.forum.service.auth.api.dto.UserRoleDto;
+import site.rhys.forum.service.auth.api.model.UserRole;
 import site.rhys.forum.service.auth.service.UserRoleService;
+
+import java.util.List;
 
 /**
  * @author Rhys Xia<xrs4433@outlook.com>
@@ -19,7 +23,8 @@ public class UserRoleController implements UserRoleApi {
     private UserRoleService userRoleService;
 
     @Override
-    public void updateByUserId(UserRoleDto userRoleDto) {
-        userRoleService.updateByUserId(userRoleDto);
+    public ResultVo<List<UserRole>> updateByUserId(UserRoleDto userRoleDto) {
+        List<UserRole> userRoleList = userRoleService.updateByUserId(userRoleDto);
+        return ResultVo.success("更新用户角色成功", userRoleList);
     }
 }

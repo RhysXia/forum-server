@@ -42,15 +42,6 @@ public interface UserApi {
     @GetMapping(params = "username")
     ResultVo<User> findByUsername(@RequestParam("username") String username);
 
-    @ApiOperation("根据用户名和密码精确查找指定用户")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "username", value = "用户名", required = true, dataType = "string"),
-            @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "string")
-    })
-    @GetMapping(params = {"username", "password"})
-    ResultVo<User> findByUsernameAndPassword(@RequestParam("username") String username,
-                                             @RequestParam("password") String password);
-
 
     @ApiOperation("根据用户名模糊查找用户")
     @ApiImplicitParams({

@@ -3,6 +3,7 @@ package site.rhys.forum.service.auth.api.api;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
+import site.rhys.forum.common.vo.ResultVo;
 import site.rhys.forum.service.auth.api.dto.TokenDto;
 import site.rhys.forum.service.auth.api.model.Token;
 
@@ -18,11 +19,11 @@ public interface TokenApi {
 
     @ApiOperation(value = "创建token，登录")
     @PostMapping
-    Token signIn(@RequestBody TokenDto tokenDto);
+    ResultVo<Token> signIn(@RequestBody TokenDto tokenDto);
 
 
     @ApiOperation(value = "删除token，注销")
     @DeleteMapping("/{token}")
-    void signOut(@PathVariable("token") String token);
+    ResultVo<Void> signOut(@PathVariable("token") String token);
 
 }
