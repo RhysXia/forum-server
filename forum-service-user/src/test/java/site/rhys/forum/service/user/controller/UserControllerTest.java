@@ -74,7 +74,6 @@ public class UserControllerTest {
     public void add() throws Exception {
         User user = new User();
         user.setUsername("test");
-        user.setPassword("test");
         user.setNickname("test");
         user.setStatus(UserStatus.ACTIVATED);
         MvcResult result = mockMvc.perform(post("/users")

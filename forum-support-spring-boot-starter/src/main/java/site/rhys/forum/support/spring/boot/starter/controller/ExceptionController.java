@@ -2,6 +2,7 @@ package site.rhys.forum.support.spring.boot.starter.controller;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import site.rhys.forum.common.exception.IllegalArgumentException;
 import site.rhys.forum.common.vo.ResultVo;
 
@@ -12,6 +13,7 @@ import site.rhys.forum.common.vo.ResultVo;
  * @since 1.0.0
  */
 @ControllerAdvice
+@ResponseBody
 public class ExceptionController {
 
     @ExceptionHandler(IllegalArgumentException.class)

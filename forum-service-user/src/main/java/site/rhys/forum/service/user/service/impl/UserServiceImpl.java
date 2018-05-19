@@ -95,10 +95,6 @@ public class UserServiceImpl implements UserService {
 
             oldUser.setEmail(user.getEmail());
         }
-        if (user.getPassword() != null) {
-            String encryptPassword = SecurityUtils.encrypt(user.getPassword());
-            oldUser.setPassword(encryptPassword);
-        }
         return userRepository.save(oldUser);
     }
 
@@ -125,10 +121,7 @@ public class UserServiceImpl implements UserService {
             log.error("状态不能为空");
             throw new IllegalArgumentException("状态不能为空");
         }
-        if (user.getPassword() == null) {
-            log.error("密码不能为空");
-            throw new IllegalArgumentException("密码不能为空");
-        }
+
         if (user.getGender() == null) {
             log.error("性别不能为空");
             throw new IllegalArgumentException("性别不能为空");
@@ -151,9 +144,6 @@ public class UserServiceImpl implements UserService {
         }
 
         BeanUtils.copyProperties(user, newUser);
-        //密码加密
-        String encryptPassword = SecurityUtils.encrypt(user.getPassword());
-        newUser.setPassword(encryptPassword);
 
         newUser.setCreateAt(new Date());
 
