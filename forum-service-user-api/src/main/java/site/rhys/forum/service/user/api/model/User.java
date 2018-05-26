@@ -28,6 +28,9 @@ public class User {
     @ApiModelProperty("昵称")
     private String nickname;
 
+    @ApiModelProperty("密码")
+    private String password;
+
     @ApiModelProperty("邮箱")
     private String email;
 
@@ -38,7 +41,6 @@ public class User {
     @ApiModelProperty("用户状态")
     @Enumerated(EnumType.STRING)
     private UserStatus status;
-
 
     /**
      * 简介

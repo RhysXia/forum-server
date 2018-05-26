@@ -73,6 +73,9 @@ public class UserServiceImpl implements UserService {
         if (user.getNickname() != null) {
             oldUser.setNickname(user.getNickname());
         }
+        if (user.getPassword() != null) {
+            oldUser.setPassword(SecurityUtils.encrypt(user.getPassword()));
+        }
         if (user.getInfo() != null) {
             oldUser.setInfo(user.getInfo());
         }
@@ -113,6 +116,10 @@ public class UserServiceImpl implements UserService {
             log.error("昵称不能为空");
             throw new IllegalArgumentException("昵称不能为空");
         }
+        if (user.getPassword() == null) {
+            log.error("密码不能为空");
+            throw new IllegalArgumentException("密码不能为空");
+        }
         if (user.getInfo() == null) {
             log.error("简介不能为空");
             throw new IllegalArgumentException("简介不能为空");
@@ -144,6 +151,8 @@ public class UserServiceImpl implements UserService {
         }
 
         BeanUtils.copyProperties(user, newUser);
+
+        newUser.setPassword(SecurityUtils.encrypt(newUser.getPassword()));
 
         newUser.setCreateAt(new Date());
 

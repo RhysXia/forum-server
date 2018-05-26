@@ -17,6 +17,8 @@ public class UserDto {
 
     private String nickname;
 
+    private String password;
+
     private UserStatus status;
 
     private String info;
